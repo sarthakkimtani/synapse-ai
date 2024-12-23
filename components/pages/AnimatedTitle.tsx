@@ -8,8 +8,8 @@ export const AnimatedTitle = () => {
   const { currentPhrase, isLoading } = usePhraseAnimation(phrases, 2500);
 
   return (
-    <h1 className="text-5xl font-bold text-center flex flex-wrap justify-center items-center mt-20">
-      <span className="mr-1">The</span>
+    <h1 className="text-3xl md:text-5xl px-2 font-bold text-center flex flex-wrap justify-center items-center mt-10 md:mt-20 mb-5 md:mb-0">
+      <span className="md:mr-1">The</span>
       <AnimatePresence mode="wait">
         {!isLoading && (
           <motion.span
@@ -21,13 +21,13 @@ export const AnimatedTitle = () => {
               duration: 0.5,
               ease: "easeOut",
             }}
-            className="inline-block text-primary w-60"
+            className="inline-block text-primary w-40 md:w-60"
           >
             {currentPhrase}
           </motion.span>
         )}
       </AnimatePresence>
-      <span className="ml-1">Language Learning Revolution</span>
+      <span className="md:ml-1">Language Learning Revolution</span>
     </h1>
   );
 };
