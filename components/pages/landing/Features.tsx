@@ -8,8 +8,8 @@ export const Features = () => {
         Your<span className="text-primary w-40 md:w-60"> AI Partner </span>for Real-World Fluency
       </h1>
       <BentoGrid />
-      <LightFiller className="-right-[410px] top-72 rotate-90 -z-10" />
-      <LightFiller className="-left-[410px] top-72 -rotate-90 -z-10" />
+      <LightFiller className="-right-[340px] w-[1250px] top-[360px] rotate-90 -z-10" />
+      <LightFiller className="-left-[340px] w-[1250px] top-[360px] -rotate-90 -z-10" />
     </section>
   );
 };

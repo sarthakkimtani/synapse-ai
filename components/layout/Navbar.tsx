@@ -20,7 +20,7 @@ export const Navbar = () => {
           Features
         </a>
       </div>
-      <Button>
+      <Button className="text-sm rounded-[30px]">
         Get Started
         <Rocket className="ml-2" size={20} />
       </Button>
