@@ -8,7 +8,7 @@ export const AnimatedTitle = () => {
   const { currentPhrase, isLoading } = usePhraseAnimation(phrases, 2500);
 
   return (
-    <h1 className="text-3xl md:text-5xl px-2 font-bold text-center flex flex-wrap justify-center items-center mt-10 md:mt-20 mb-5 md:mb-0">
+    <h1 className="text-3xl md:text-5xl px-2 font-bold text-center flex flex-wrap justify-center items-center mt-24 md:mt-20 mb-5 md:mb-0">
       <span className="md:mr-1">The</span>
       <AnimatePresence mode="wait">
         {!isLoading && (

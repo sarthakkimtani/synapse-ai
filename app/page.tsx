@@ -1,13 +1,13 @@
-import { LightFiller } from "@/components/util/LightFiller";
+import { Hero } from "@/components/pages/landing/Hero";
+import { Features } from "@/components/pages/landing/Features";
 import { Navbar } from "@/components/layout/Navbar";
-import { Hero } from "@/components/pages/Hero";
 
 export default function Home() {
   return (
     <>
-      <LightFiller />
       <Navbar />
       <Hero />
+      <Features />
     </>
   );
 }

@@ -16,7 +16,7 @@ export const Navbar = () => {
         <a className="cursor-pointer" href="#">
           About
         </a>
-        <a className="cursor-pointer" href="#">
+        <a className="cursor-pointer" href="#features">
           Features
         </a>
       </div>

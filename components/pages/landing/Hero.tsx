@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { AnimatedTitle } from "@/components/pages/AnimatedTitle";
+import { AnimatedTitle } from "@/components/pages/landing/AnimatedTitle";
 
 import Node from "@/assets/node.svg";
 

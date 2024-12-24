@@ -2,9 +2,9 @@ import Image from "next/image";
 
 import Filler from "@/assets/light-filler.png";
 
-export const LightFiller = () => {
+export const LightFiller = ({ className }: { className?: string }) => {
   return (
-    <div className="absolute w-full top-0 left-1/2 transform -translate-x-1/2 -z-10">
+    <div className={`absolute ${className}`}>
       <Image src={Filler} draggable={false} alt="Filler" />
     </div>
   );
