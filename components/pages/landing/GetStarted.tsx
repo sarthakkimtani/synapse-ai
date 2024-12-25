@@ -10,7 +10,7 @@ export const GetStarted = () => {
       </h1>
       <div className="w-full flex flex-col justify-center items-center py-44">
         <Button className="w-2/3 md:w-1/3 lg:w-1/4 h-24 rounded-[50px] font-semibold shadow-[0_0_75px_#FFFAED]">
-          <span className="text-2xl md:text-3xl">Get Started</span>
+          <span className="text-2xl lg:text-3xl">Get Started</span>
           <Rocket className="ml-4" size={36} />
         </Button>
       </div>
