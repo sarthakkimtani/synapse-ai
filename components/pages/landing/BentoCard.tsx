@@ -1,4 +1,4 @@
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 
 interface BentoCardProps {
   children: React.ReactNode;
