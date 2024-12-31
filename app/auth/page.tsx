@@ -1,15 +1,23 @@
-import type { Metadata } from "next";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
+import { createClient } from "@/utils/supabase/server";
 import { AuthButton } from "@/components/pages/auth/AuthButton";
 
 import Grid from "@/assets/grid.svg";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Synapse: Login or Signup",
 };
 
-export default function Auth() {
+export default async function Auth() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+
+  if (data?.user) {
+    redirect("/chat");
+  }
+
   return (
     <section className="fixed inset-0 overflow-hidden">
       <Image src={Grid} className="-z-10 object-cover" fill alt="Grid" />

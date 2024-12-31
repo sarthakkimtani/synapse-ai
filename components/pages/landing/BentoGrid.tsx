@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { BentoCard } from "@/components/pages/landing/BentoCard";
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 
 import Chat from "@/assets/chat.svg";
 import Audio from "@/assets/audio.svg";
