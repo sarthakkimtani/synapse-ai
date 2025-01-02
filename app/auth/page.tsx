@@ -22,7 +22,7 @@ export default async function Auth() {
     <section className="fixed inset-0 overflow-hidden">
       <Image src={Grid} className="-z-10 object-cover" fill alt="Grid" />
       <div className="flex items-center justify-center w-full h-full">
-        <div className="flex flex-col items-center justify-center w-4/5 md:w-5/12 lg:w-1/3 bg-black border border-primary py-10 px-6 rounded-xl shadow-[0_0_10px_#FFFAED]">
+        <div className="flex flex-col items-center justify-center w-4/5 md:w-5/12 lg:w-1/3 bg-black border border-primary py-10 px-6 rounded-xl shadow-[0_0_10px_theme(colors.primary)]">
           <h5 className="text-2xl font-bold text-white text-center">
             Login or Signup to use Synapse
           </h5>

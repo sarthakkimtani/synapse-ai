@@ -5,6 +5,17 @@ import FbIcon from "@/assets/brands/facebook.svg";
 import XIcon from "@/assets/brands/x.svg";
 import LinkedInIcon from "@/assets/brands/linkedin.svg";
 
+const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
+  return (
+    <a
+      href={href}
+      className="px-4 py-2 rounded-2xl font-medium cursor-pointer text-white transition ease-in-out hover:bg-zinc-800"
+    >
+      {children}
+    </a>
+  );
+};
+
 export const Footer = () => {
   return (
     <footer className="flex flex-col items-center justify-center mt-4">
@@ -13,24 +24,9 @@ export const Footer = () => {
           <Image className="cursor-pointer" src={Brand} draggable={false} alt="Brand" width={150} />
         </div>
         <div className="flex flex-row items-center mt-8">
-          <a
-            href="#"
-            className="px-4 py-2 rounded-2xl font-medium cursor-pointer text-white transition ease-in-out hover:bg-zinc-800"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="px-4 py-2 rounded-2xl font-medium cursor-pointer text-white transition ease-in-out hover:bg-zinc-800"
-          >
-            About
-          </a>
-          <a
-            href="#features"
-            className="px-4 py-2 rounded-2xl font-medium cursor-pointer text-white transition ease-in-out hover:bg-zinc-800"
-          >
-            Features
-          </a>
+          <FooterLink href="#">Home</FooterLink>
+          <FooterLink href="#">About</FooterLink>
+          <FooterLink href="#features">Features</FooterLink>
         </div>
         <div className="flex flex-row items-center mt-6">
           <Image className="w-6 cursor-pointer" src={LinkedInIcon} alt="linkedin" />
