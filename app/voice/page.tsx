@@ -1,17 +1,17 @@
 import { redirect } from "next/navigation";
 
-import { ChatForm } from "@/components/pages/chat/ChatForm";
+import { Title } from "@/components/common/Title";
 import { AppNavbar } from "@/components/common/AppNavbar";
 import { AppFooter } from "@/components/common/AppFooter";
-import { Title } from "@/components/common/Title";
 import { PatternFiller } from "@/components/common/PatternFiller";
+import { VoiceForm } from "@/components/pages/voice/VoiceForm";
 import { createClient } from "@/utils/supabase/server";
 
 export const metadata = {
-  title: "Synapse: Chat Mode",
+  title: "Synapse: Voice Mode",
 };
 
-export default async function Chat() {
+export default async function Voice() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
 
@@ -25,11 +25,11 @@ export default async function Chat() {
       <AppNavbar />
       <div className="flex flex-col items-center justify-center">
         <Title>
-          Master&nbsp;
-          <span className="text-primary w-40 md:w-60"> Languages </span>
-          &nbsp;&nbsp; Through Conversations
+          Voice you way to&nbsp;
+          <span className="text-primary w-40 md:w-60">Language</span>
+          &nbsp;Mastery
         </Title>
-        <ChatForm />
+        <VoiceForm />
       </div>
       <AppFooter />
     </div>
