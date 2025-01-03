@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { MessagesSquare, SendHorizonal } from "lucide-react";
+import { MessagesSquare } from "lucide-react";
 
 export const VoiceForm = () => {
   return (
@@ -16,19 +16,18 @@ export const VoiceForm = () => {
             <MessagesSquare size={28} color="#FFE9B4" />
           </Link>
         </motion.div>
-        <motion.form
+        <motion.div
           layoutId="expandable"
-          className="flex items-center bg-[#171817] w-2/3 md:w-2/4 h-16 p-4 rounded-xl shadow-[0px_0px_20px_theme(colors.primary)]"
+          className="flex items-center justify-center cursor-pointer bg-[#171817] text-[#4D4D4D] w-2/3 md:w-2/4 h-16 p-4 rounded-xl shadow-[0px_0px_20px_theme(colors.primary)]"
         >
-          <input
-            type="text"
-            className="bg-[#171817] w-full h-full text-white outline-none break-words placeholder:text-ellipsis"
-            placeholder="Chat with AI in any language..."
-          />
-          <button className="flex items-center justify-center w-10 h-10 bg-primary cursor-pointer rounded-xl ml-4">
-            <SendHorizonal size={18} color="black" />
-          </button>
-        </motion.form>
+          <p className="text-lg">
+            Enter &nbsp;
+            <span className="px-2 bg-primary text-black font-bold rounded inline-block align-top">
+              &#9251;
+            </span>
+            &nbsp; to begin voice mode
+          </p>
+        </motion.div>
       </div>
     </AnimatePresence>
   );
