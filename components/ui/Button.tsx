@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 interface ButtonProps {
   className?: string;
@@ -10,6 +10,7 @@ interface ButtonProps {
   routeTo?: string;
 }
 
+// TODO: Replace with shadcn/ui Button
 export const Button = ({ className, children, routeTo }: ButtonProps) => {
   const router = useRouter();
 

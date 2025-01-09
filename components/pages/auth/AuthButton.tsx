@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
 import { createClient } from "@/utils/supabase/server";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 import Google from "@/assets/brands/google.svg";
 import Github from "@/assets/brands/github.svg";
