@@ -2,19 +2,34 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { AudioLinesIcon, Play } from "lucide-react";
 
-import { LanguageSwitcher } from "@/components/pages/chat/LanguageSwitcher";
-import { ModeSwitcher } from "./ModeSwitcher";
+import { LanguageSwitcher } from "@/components/pages/exercise/LanguageSwitcher";
+import { ModeSwitcher } from "@/components/pages/exercise/ModeSwitcher";
 
-const ChatButton = () => {
+const FormButtons = () => {
+  const router = useRouter();
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [selectedMode, setSelectedMode] = useState<string>("");
 
+  const handleClick = () => {
+    if (!selectedLanguage || !selectedMode) {
+      return;
+    }
+    const data = { lang: selectedLanguage, mode: selectedMode };
+    const params = new URLSearchParams(data).toString();
+    router.push(`/exercise/new?${params}`);
+  };
+
   return (
-    <motion.div layoutId="expandable" className="flex flex-col md:flex-row items-center">
-      <button className="w-full md:w-auto h-16 flex items-center justify-center text-lg bg-primary px-5 rounded-xl text-black shadow-[0px_0px_20px_theme(colors.primary)]">
+    <motion.div
+      layoutId="expandable"
+      className="flex flex-col md:flex-row items-center"
+      onClick={handleClick}
+    >
+      <button className="w-full md:w-auto h-16 flex items-center justify-center text-lg bg-primary hover:bg-yellow-50 transition-colors duration-150 ease-linear px-5 rounded-xl text-black shadow-[0px_0px_20px_theme(colors.primary)]">
         <Play size={20} className="text-black mr-3" />
         <span className="font-semibold whitespace-nowrap text-lg">Start Exercise</span>
       </button>
@@ -29,11 +44,11 @@ const ChatButton = () => {
   );
 };
 
-export const ChatForm = () => {
+export const ExerciseForm = () => {
   return (
     <AnimatePresence mode="wait">
       <div className="flex flex-col md:flex-row items-center w-full justify-center z-0">
-        <ChatButton />
+        <FormButtons />
         <motion.div layoutId="shrinkable" className="flex-shrink-0">
           <Link
             href="/voice"

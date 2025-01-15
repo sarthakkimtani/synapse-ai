@@ -10,7 +10,7 @@ export const VoiceForm = () => {
       <div className="flex flex-row items-center w-full justify-center z-0">
         <motion.div layoutId="shrinkable" className="flex-shrink-0">
           <Link
-            href="/chat"
+            href="/exercise"
             className="flex items-center justify-center w-16 h-16 bg-[#171817] cursor-pointer rounded-xl mr-4 md:ml-8 shadow-[0px_0px_20px_theme(colors.primary)]"
           >
             <MessagesSquare size={28} color="#FFE9B4" />

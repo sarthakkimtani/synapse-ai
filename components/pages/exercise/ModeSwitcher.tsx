@@ -26,7 +26,7 @@ export const ModeSwitcher = ({ currMode, setCurrMode }: ModeSwitcherProps) => {
       <PopoverTrigger className="bg-[#212221] h-16 w-full md:w-auto rounded-xl px-4 py-2 ml-0 lg:ml-10 mb-8 md:mb-0 hover:bg-[#2a2b2a] transition-colors duration-200 shadow-[0px_0px_20px_theme(colors.primary)] flex items-center justify-center">
         <div className="mr-2 flex flex-row items-center">
           {mode && mode.icon}
-          <p className="text-lg ml-2">{mode?.abbreviation || "Select Mode"}</p>
+          <p className="text-lg ml-2">{mode?.name.split(" ")[0] || "Select Mode"}</p>
         </div>
         <ChevronDown strokeWidth={1} />
       </PopoverTrigger>

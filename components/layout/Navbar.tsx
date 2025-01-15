@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/Button";
+import { RouteButton } from "@/components/common/RouteButton";
 
 import Brand from "@/assets/brand.svg";
 import { Rocket } from "lucide-react";
@@ -23,10 +23,10 @@ export const Navbar = () => {
           Features
         </a>
       </div>
-      <Button className="text-sm rounded-[30px]" routeTo="/chat">
+      <RouteButton className="text-sm rounded-[30px]" routeTo="/exercise">
         Get Started
         <Rocket className="ml-2" size={20} />
-      </Button>
+      </RouteButton>
     </nav>
   );
 };

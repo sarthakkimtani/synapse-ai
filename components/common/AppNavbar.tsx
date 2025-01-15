@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/Button";
+import { RouteButton } from "@/components/common/RouteButton";
 
 import Brand from "@/assets/brand.svg";
 import GitHub from "@/assets/brands/github-dark.svg";
@@ -12,10 +12,10 @@ export const AppNavbar = () => {
       <Link href="/">
         <Image className="cursor-pointer" src={Brand} draggable={false} alt="Brand" width={150} />
       </Link>
-      <Button className="flex items-center text-sm rounded-[30px]">
+      <RouteButton className="flex items-center text-sm rounded-[30px]">
         GitHub
         <Image src={GitHub} className="ml-3 w-6" draggable={false} alt="GitHub" />
-      </Button>
+      </RouteButton>
     </div>
   );
 };
