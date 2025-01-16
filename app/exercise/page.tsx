@@ -8,7 +8,7 @@ import { PatternFiller } from "@/components/common/PatternFiller";
 import { createClient } from "@/utils/supabase/server";
 
 export const metadata = {
-  title: "Synapse: Chat Mode",
+  title: "Synapse: Practice using Exercises",
 };
 
 export default async function Exercise() {

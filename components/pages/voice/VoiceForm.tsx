@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { MessagesSquare } from "lucide-react";
+import { BookOpenText } from "lucide-react";
 
 export const VoiceForm = () => {
   return (
@@ -13,7 +13,7 @@ export const VoiceForm = () => {
             href="/exercise"
             className="flex items-center justify-center w-16 h-16 bg-[#171817] cursor-pointer rounded-xl mr-4 md:ml-8 shadow-[0px_0px_20px_theme(colors.primary)]"
           >
-            <MessagesSquare size={28} color="#FFE9B4" />
+            <BookOpenText size={28} color="#FFE9B4" />
           </Link>
         </motion.div>
         <motion.div

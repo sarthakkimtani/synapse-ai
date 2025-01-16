@@ -2,22 +2,27 @@ import { z } from "zod";
 
 export const RPExerciseSchema = z
   .object({
-    mode: z.literal("RP").describe("Mode of the exercise, which is Role-Playing Scenario"),
-    scenario: z.string().describe("Description of the scenario"),
-    characterProfiles: z
+    mode: z
+      .literal("RP")
+      .describe("Mode of the exercise, which is a Chat-based Role-Playing Scenario"),
+    roleDescription: z
+      .string()
+      .describe("Description of the role the user will assume in the scenario"),
+    initialPrompt: z
+      .string()
+      .describe("The initial message that sets the stage for the chat-based role-playing scenario"),
+    conversation: z
       .array(
         z.object({
-          name: z.string().describe("Name of the character"),
-          role: z.string().describe("Role of the character in the scenario"),
-          objectives: z.string().describe("The goals the character aims to achieve"),
-        })
-      )
-      .describe("Character profiles involved in the scenario"),
-    dialoguePrompts: z
-      .array(
-        z.object({
-          character: z.string().describe("The character who is speaking the prompt"),
-          prompt: z.string().describe("The prompt/question posed to the user"),
+          speaker: z
+            .union([z.literal("system"), z.literal("character"), z.literal("user")])
+            .describe(
+              'Role of the speaker in the message; should be one of "system" or "character" or "user"'
+            ),
+          message: z
+            .string()
+            .optional()
+            .describe("The message content; optional for system or question-based messages"),
           mcq: z
             .object({
               question: z.string().describe("MCQ question posed to the user"),
@@ -33,14 +38,17 @@ export const RPExerciseSchema = z
                 })
                 .describe("Feedback for the answer choice"),
             })
-            .describe("Multiple choice question for the user"),
+            .optional()
+            .describe("Multiple choice question interleaved in the conversation"),
         })
       )
-      .min(4)
-      .max(5)
-      .describe("Dialogue prompts with multiple choice questions, 4-5 questions in total"),
+      .min(5)
+      .max(10)
+      .describe(
+        "Chat-based conversation, including system, character messages, and interleaved MCQs"
+      ),
   })
-  .describe("Schema for Role-Playing Scenario Exercise");
+  .describe("Schema for Chat-based Role-Playing Scenario Exercise");
 
 export const SCExerciseSchema = z
   .object({

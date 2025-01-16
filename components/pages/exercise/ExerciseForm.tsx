@@ -18,9 +18,9 @@ const FormButtons = () => {
     if (!selectedLanguage || !selectedMode) {
       return;
     }
-    const data = { lang: selectedLanguage, mode: selectedMode };
+    const data = { lang: selectedLanguage };
     const params = new URLSearchParams(data).toString();
-    router.push(`/exercise/new?${params}`);
+    router.push(`/exercise/${selectedMode.toLowerCase()}?${params}`);
   };
 
   return (
