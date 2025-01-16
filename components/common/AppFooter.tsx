@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { githubLink, linkedinLink, xLink } from "@/utils/social";
+
 // TODO: Reuse Icons with different colors
 import XIcon from "@/assets/brands/x-primary.svg";
 import LinkedInIcon from "@/assets/brands/linkedin-primary.svg";
@@ -19,19 +21,15 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 };
 
 export const AppFooter = () => {
-  const linkedinUrl = "https://www.linkedin.com/in/sarthak-kimtani/";
-  const githubUrl = "https://github.com/sarthakkimtani/synapse-ai";
-  const xUrl = "https://x.com/sarthakkimtani/";
-
   return (
     <div className="absolute bottom-0 flex flex-row items-center justify-center w-full py-8 text-center text-white">
-      <FooterLink href={linkedinUrl}>
+      <FooterLink href={linkedinLink}>
         <Image src={LinkedInIcon} alt="LinkedIn" height={24} />
       </FooterLink>
-      <FooterLink href={githubUrl}>
+      <FooterLink href={githubLink}>
         <Image src={GitHubIcon} alt="LinkedIn" height={24} />
       </FooterLink>
-      <FooterLink href={xUrl}>
+      <FooterLink href={xLink}>
         <Image src={XIcon} alt="LinkedIn" height={24} />
       </FooterLink>
     </div>
