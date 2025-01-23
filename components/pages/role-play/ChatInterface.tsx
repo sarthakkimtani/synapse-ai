@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import { Home } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { MessageBubble } from "@/components/pages/rp/MessageBubble";
-import { MCQQuestion } from "@/components/pages/rp/MCQQuestion";
-import { ChatHeader } from "@/components/pages/rp/ChatHeader";
+import { MessageBubble } from "@/components/pages/role-play/MessageBubble";
+import { MCQQuestion } from "@/components/pages/role-play/MCQQuestion";
+import { ChatHeader } from "@/components/pages/role-play/ChatHeader";
 
 import type { RPExercise } from "@/app/api/exercise/schema";
 
@@ -57,7 +57,7 @@ export function ChatInterface({ exercise }: ChatInterfaceProps) {
   const isComplete = currentIndex === exercise.conversation.length - 1;
 
   return (
-    <div className="min-h-screen bg-background dark">
+    <div className="min-h-screen">
       <div className="max-w-3xl mx-auto min-h-screen">
         <div className="p-6 flex flex-col min-h-screen text-foreground">
           <motion.div

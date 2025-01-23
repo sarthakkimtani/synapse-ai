@@ -14,7 +14,7 @@ interface ModeSwitcherProps {
 export const ModeSwitcher = ({ currMode, setCurrMode }: ModeSwitcherProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const mode = modes.find((mode) => mode.abbreviation === currMode);
+  const mode = modes.find((mode) => mode.route === currMode);
 
   const switchMode = (newMode: string) => {
     setCurrMode(newMode);
@@ -37,10 +37,10 @@ export const ModeSwitcher = ({ currMode, setCurrMode }: ModeSwitcherProps) => {
               w-full flex flex-col ${
                 index !== modes.length - 1 ? "mb-2" : ""
               } p-3 transition-colors duration-200 rounded-md cursor-pointer border border-[#262626] hover:bg-[#2a2b2a]
-              ${currMode === mode.abbreviation ? "bg-[#282824]" : null}
+              ${currMode === mode.route ? "bg-[#282824]" : null}
             `}
-            key={mode.abbreviation}
-            onClick={() => switchMode(mode.abbreviation)}
+            key={mode.route}
+            onClick={() => switchMode(mode.route)}
           >
             <div className="flex flex-row">
               {mode.icon}

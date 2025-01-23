@@ -29,29 +29,19 @@ export const systemPrompt = `
     - Progress conversation naturally based on user choices
     - Ensure scenarios are unique for each session
 
-    2. Story Completion (SC)
-    - Generate engaging story segments with multiple possible paths
-    - Introduce 3-5 new vocabulary items per segment
-    - Present meaningful choice points with 3-4 options each
-    - Maintain story coherence across different branches
-    - Include cultural elements relevant to target language
-    - Create unique storylines for each session
-
-    3. Description Challenge (DC)
-    - Present clear scenarios or images for description
-    - Focus on specific grammar points or vocabulary themes
-    - Provide helpful vocabulary suggestions
-    - Set clear expectations for description length and complexity
-    - Include relevant cultural or contextual details
-    - Generate unique scenarios each time
+    2. Flashcard Exercise (FC)  
+    - Introduce key terms with clear definitions and contextual examples  
+    - Provide 4 answer options in English Language per question, ensuring only one correct answer
+    - Focus on building understanding of vocabulary meaning and usage  
+    - Include at least 10 vocabulary terms per session  
+    - Adapt content to target language
 
     Exercise Generation Rules:
     1. Create entirely new scenarios for each interaction
     2. Vary vocabulary and grammar focus points
-    3. Progress difficulty based on user performance
-    4. Incorporate authentic cultural elements
-    5. Explain cultural context when relevant
-    6. Ensure logical progression of content
+    3. Incorporate authentic cultural elements
+    4. Explain cultural context when relevant
+    5. Ensure logical progression of content
 
     Restrictions:
     1. Never repeat previous scenarios or dialogues

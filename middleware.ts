@@ -6,5 +6,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/chat", "/voice"],
+  matcher: ["/chat", "/voice", "/exercise", "/exercise/(role-play|flashcards)"],
 };

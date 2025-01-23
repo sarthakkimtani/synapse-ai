@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { ChatInterface } from "@/components/pages/rp/ChatInterface";
+import { ChatInterface } from "@/components/pages/role-play/ChatInterface";
 import { AILoader } from "@/components/common/AILoader";
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 

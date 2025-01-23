@@ -20,7 +20,7 @@ const FormButtons = () => {
     }
     const data = { lang: selectedLanguage };
     const params = new URLSearchParams(data).toString();
-    router.push(`/exercise/${selectedMode.toLowerCase()}?${params}`);
+    router.push(`/exercise/${selectedMode}?${params}`);
   };
 
   return (
