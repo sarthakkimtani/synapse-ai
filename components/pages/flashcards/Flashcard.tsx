@@ -3,19 +3,22 @@
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 
-import { FCExercise } from "@/app/api/exercise/schema";
+import { SafeFCExercise } from "@/app/api/exercise/schema";
 import { cn } from "@/lib/utils";
 
 interface FlashcardProps {
-  card: FCExercise["flashcards"][number];
+  card: SafeFCExercise["flashcards"][number];
   onAnswer: (isCorrect: boolean) => void;
   onNext: () => void;
+  lang: string;
+  index: number;
 }
 
-export const Flashcard = ({ card, onAnswer, onNext }: FlashcardProps) => {
+export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   useEffect(() => {
     setIsFlipped(false);
@@ -29,13 +32,22 @@ export const Flashcard = ({ card, onAnswer, onNext }: FlashcardProps) => {
     }
   };
 
-  const handleAnswerSelect = (answer: string) => {
-    const correct = answer === card.correctAnswer;
+  const handleAnswerSelect = async (answer: string) => {
+    const response = await fetch("/api/answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ lang, index, answer }),
+    });
+    const { isCorrect: correct } = await response.json();
+    console.log(correct);
     setSelectedAnswer(answer);
     setHasAnswered(true);
+    setIsCorrect(correct);
     onAnswer(correct);
 
-    setTimeout(() => onNext(), 750);
+    setTimeout(() => onNext(), 500);
   };
 
   return (
@@ -84,11 +96,11 @@ export const Flashcard = ({ card, onAnswer, onNext }: FlashcardProps) => {
                       "hover:border-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2",
                       hasAnswered &&
                         option === selectedAnswer &&
-                        option === card.correctAnswer &&
+                        isCorrect &&
                         "border-green-500 bg-green-50",
                       hasAnswered &&
                         option === selectedAnswer &&
-                        option !== card.correctAnswer &&
+                        !isCorrect &&
                         "border-red-500 bg-red-50",
                       "disabled:cursor-not-allowed"
                     )}

@@ -2,28 +2,48 @@ import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { NextResponse } from "next/server";
 
-import { getExerciseSchema } from "@/app/api/exercise/schema";
+import { getExerciseSchema, SafeFCExerciseSchema } from "@/app/api/exercise/schema";
+
+import { enhancePromptWithParams } from "@/utils/exercise-params";
+import { createClient } from "@/utils/supabase/server";
+
 import { systemPrompt } from "@/lib/prompt";
+import { redisClient } from "@/lib/redis";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { prompt, mode } = await req.json();
-  if (!mode) {
-    return NextResponse.json({ message: "Invalid Mode" }, { status: 400 });
+  const { prompt, mode, lang } = await req.json();
+  if (!mode || !lang) {
+    return NextResponse.json({ message: "Invalid Request Body" }, { status: 400 });
   }
 
   try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getSession();
+    const user = data.session?.user;
+
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-exp"),
+      model: google("gemini-1.5-flash"),
+      prompt: enhancePromptWithParams(prompt),
       schema: getExerciseSchema(mode),
       system: systemPrompt,
-      prompt,
+      temperature: 0.6,
     });
 
-    return NextResponse.json(object);
+    if (mode === "FC") {
+      const redisKey = `user:${user?.id}:${lang}:flashcards`;
+
+      for (let i = 0; i < object.flashcards.length; i++) {
+        const card = object.flashcards[i];
+        await redisClient.hset(redisKey, `card:${i}`, card.correctAnswer);
+      }
+
+      const safeObject = SafeFCExerciseSchema.parse(object);
+      return NextResponse.json(safeObject);
+    }
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "Error occurred" }, { status: 500 });
+    console.error("Exercise generation error:", error);
+    return NextResponse.json({ error: "Failed to generate exercise content." }, { status: 500 });
   }
 }

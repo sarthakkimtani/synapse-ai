@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
+import { useState } from "react";
 
 import { Flashcard } from "@/components/pages/flashcards/Flashcard";
 import { CompletionCard } from "@/components/pages/flashcards/CompletionCard";
-import { FCExercise } from "@/app/api/exercise/schema";
+import { SafeFCExercise } from "@/app/api/exercise/schema";
 
 interface FlashcardInterfaceProps {
-  flashcards: FCExercise["flashcards"];
+  flashcards: SafeFCExercise["flashcards"];
 }
 
 export const FlashcardInterface = ({ flashcards }: FlashcardInterfaceProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const searchParams = useSearchParams();
+  const lang = searchParams.get("lang");
 
   const handleAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -32,7 +35,7 @@ export const FlashcardInterface = ({ flashcards }: FlashcardInterfaceProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full p-6 mt-36 flex flex-col items-center justify-center text-black">
+      <div className="w-full p-6 mt-20 flex flex-col items-center justify-center text-black">
         <motion.div
           initial={{ width: 0 }}
           animate={{
@@ -45,6 +48,8 @@ export const FlashcardInterface = ({ flashcards }: FlashcardInterfaceProps) => {
         ) : (
           <>
             <Flashcard
+              lang={lang as string}
+              index={currentIndex}
               card={flashcards[currentIndex]}
               onAnswer={handleAnswer}
               onNext={handleNext}
