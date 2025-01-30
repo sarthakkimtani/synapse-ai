@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 
-import { SafeFCExercise } from "@/app/api/exercise/schema";
+import { SafeFCExercise } from "@/app/api/flashcards/schema";
 import { cn } from "@/lib/utils";
 
 interface FlashcardProps {
@@ -33,7 +33,7 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
   };
 
   const handleAnswerSelect = async (answer: string) => {
-    const response = await fetch("/api/answer", {
+    const response = await fetch("/api/flashcards/answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
       body: JSON.stringify({ lang, index, answer }),
     });
     const { isCorrect: correct } = await response.json();
-    console.log(correct);
+
     setSelectedAnswer(answer);
     setHasAnswered(true);
     setIsCorrect(correct);

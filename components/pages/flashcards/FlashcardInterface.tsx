@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import { Flashcard } from "@/components/pages/flashcards/Flashcard";
 import { CompletionCard } from "@/components/pages/flashcards/CompletionCard";
-import { SafeFCExercise } from "@/app/api/exercise/schema";
+import { SafeFCExercise } from "@/app/api/flashcards/schema";
 
 interface FlashcardInterfaceProps {
   flashcards: SafeFCExercise["flashcards"];

@@ -8,8 +8,8 @@ import { FlashcardInterface } from "@/components/pages/flashcards/FlashcardInter
 import { ErrorBanner } from "@/components/common/ErrorBanner";
 import { AILoader } from "@/components/common/AILoader";
 
-import { SafeFCExercise } from "@/app/api/exercise/schema";
-import { fetchExercise } from "@/lib/fetchExercise";
+import { fetchFlashcardExercise } from "@/lib/fetch";
+import { SafeFCExercise } from "@/app/api/flashcards/schema";
 
 import Grid from "@/assets/grid.svg";
 
@@ -24,7 +24,7 @@ export default function FlashcardExercise() {
   useEffect(() => {
     const callAPI = async () => {
       try {
-        const data: SafeFCExercise = await fetchExercise(lang, "FC");
+        const data: SafeFCExercise = await fetchFlashcardExercise(lang);
         setExercise(data);
       } catch (error) {
         if (error instanceof Error) {
