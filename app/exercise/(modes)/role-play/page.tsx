@@ -9,8 +9,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ChatBubbleList } from "@/components/pages/role-play/ChatBubbleList";
 import { LoadingBubble } from "@/components/pages/role-play/LoadingBubble";
 import { MessageBox } from "@/components/pages/role-play/MessageBox";
+import { ErrorAlert } from "@/components/pages/role-play/ErrorAlert";
 import { Button } from "@/components/ui/button";
 
+import { enhancePromptWithParams } from "@/utils/exercise-params";
 import Grid from "@/assets/grid.svg";
 
 export default function Chat() {
@@ -18,16 +20,13 @@ export default function Chat() {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
 
-  const { messages, input, handleInputChange, handleSubmit, append, isLoading } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, append, isLoading, error } = useChat();
   const [closed, setClosed] = useState<boolean>(false);
 
   useEffect(() => {
-    const addInitialMessage = async () => {
-      await append({
-        content: `Start Role-Play mode in '${lang}' as the target language now.`,
-        role: "user",
-      });
-    };
+    const prompt = `Start Role-Play mode in '${lang}' as the target language now.`;
+    const enhancedPrompt = enhancePromptWithParams(prompt);
+    const addInitialMessage = async () => await append({ content: enhancedPrompt, role: "user" });
     addInitialMessage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -45,6 +44,7 @@ export default function Chat() {
           <div className="space-y-6 px-4">
             <ChatBubbleList messages={messages} onClose={onClose} />
             {isLoading && <LoadingBubble />}
+            {error && <ErrorAlert error={error} />}
           </div>
         </div>
       </div>
