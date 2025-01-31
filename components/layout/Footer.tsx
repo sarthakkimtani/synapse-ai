@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { githubLink, linkedinLink, xLink } from "@/utils/social";
 
 import Brand from "@/assets/brand.svg";
-import FbIcon from "@/assets/brands/facebook.svg";
+import GitHubIcon from "@/assets/brands/github-gray.svg";
 import XIcon from "@/assets/brands/x.svg";
 import LinkedInIcon from "@/assets/brands/linkedin.svg";
 
@@ -29,9 +32,15 @@ export const Footer = () => {
           <FooterLink href="#features">Features</FooterLink>
         </div>
         <div className="flex flex-row items-center mt-6">
-          <Image className="w-6 cursor-pointer" src={LinkedInIcon} alt="linkedin" />
-          <Image className="w-6 ml-4 cursor-pointer" src={XIcon} alt="x-logo" />
-          <Image className="w-6 ml-4 cursor-pointer" src={FbIcon} alt="facebook" />
+          <Link href={linkedinLink} target="_blank">
+            <Image className="w-6 cursor-pointer" src={LinkedInIcon} alt="linkedin" />
+          </Link>
+          <Link href={githubLink} target="_blank">
+            <Image className="w-6 ml-4 cursor-pointer" src={GitHubIcon} alt="github" />
+          </Link>
+          <Link href={xLink} target="_blank">
+            <Image className="w-6 ml-4 cursor-pointer" src={XIcon} alt="x" />
+          </Link>
         </div>
         <div className="w-full border-[0.5px] border-zinc-700 mt-10" />
         <span className="text-md text-zinc-600 my-5">
