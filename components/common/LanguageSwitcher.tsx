@@ -11,11 +11,13 @@ import { languages } from "@/utils/languages";
 interface LanguageSwitcherProps {
   selectedLanguage: string;
   setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
+  className?: string;
 }
 
 export const LanguageSwitcher = ({
   selectedLanguage,
   setSelectedLanguage,
+  className,
 }: LanguageSwitcherProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const currLanguage = languages.find((lang) => lang.value === selectedLanguage);
@@ -27,10 +29,10 @@ export const LanguageSwitcher = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className="bg-[#212221] h-16 w-full md:w-auto rounded-xl px-4 py-2 ml-0 lg:ml-10 mb-8 md:mb-0 hover:bg-[#2a2b2a] transition-colors duration-200 shadow-[0px_0px_20px_theme(colors.primary)] flex items-center justify-center">
+      <PopoverTrigger className={className}>
         <div className="mr-2 flex flex-row items-center">
           {currLanguage && <ReactCountryFlag countryCode={currLanguage.flag.toUpperCase()} svg />}
-          <p className="text-lg ml-2">{currLanguage?.label || "Select Language"}</p>
+          <p className="ml-2">{currLanguage?.label || "Select Language"}</p>
         </div>
         <ChevronDown strokeWidth={1} />
       </PopoverTrigger>

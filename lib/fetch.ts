@@ -8,3 +8,13 @@ export const fetchFlashcardExercise = async (lang: string | null) => {
   });
   return await response.json();
 };
+
+export const fetchWritingReview = async (lang: string | null, content: string) => {
+  const response = await fetch("/api/writing", {
+    method: "POST",
+    body: JSON.stringify({
+      prompt: `Start AI writing review in ${lang} target language using the following content:\n ${content}`,
+    }),
+  });
+  return await response.json();
+};

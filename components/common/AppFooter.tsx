@@ -24,13 +24,13 @@ export const AppFooter = () => {
   return (
     <div className="absolute bottom-0 flex flex-row items-center justify-center w-full py-8 text-center text-white">
       <FooterLink href={linkedinLink}>
-        <Image src={LinkedInIcon} alt="LinkedIn" height={24} />
+        <Image src={LinkedInIcon} alt="Linkedin" height={24} />
       </FooterLink>
       <FooterLink href={githubLink}>
-        <Image src={GitHubIcon} alt="LinkedIn" height={24} />
+        <Image src={GitHubIcon} alt="GitHub" height={24} />
       </FooterLink>
       <FooterLink href={xLink}>
-        <Image src={XIcon} alt="LinkedIn" height={24} />
+        <Image src={XIcon} alt="X" height={24} />
       </FooterLink>
     </div>
   );

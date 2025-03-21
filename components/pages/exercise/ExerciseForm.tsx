@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { AudioLinesIcon, Play } from "lucide-react";
+import { PenTool, Play } from "lucide-react";
 
-import { LanguageSwitcher } from "@/components/pages/exercise/LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 import { ModeSwitcher } from "@/components/pages/exercise/ModeSwitcher";
 
 const FormButtons = () => {
@@ -35,6 +35,7 @@ const FormButtons = () => {
       </button>
       <div className="flex flex-col md:flex-row items-center w-full my-5 md:my-0">
         <LanguageSwitcher
+          className="bg-[#212221] h-16 w-full text-lg md:w-auto rounded-xl px-4 py-2 ml-0 lg:ml-10 mb-8 md:mb-0 hover:bg-[#2a2b2a] transition-colors duration-200 shadow-[0px_0px_20px_theme(colors.primary)] flex items-center justify-center"
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
         />
@@ -51,10 +52,10 @@ export const ExerciseForm = () => {
         <FormButtons />
         <motion.div layoutId="shrinkable" className="flex-shrink-0">
           <Link
-            href="/voice"
+            href="/writing"
             className="hidden md:flex items-center justify-center w-16 h-16 bg-[#171817] cursor-pointer rounded-xl ml-4 md:ml-8 shadow-[0px_0px_20px_theme(colors.primary)]"
           >
-            <AudioLinesIcon size={28} color="#FFE9B4" />
+            <PenTool size={28} color="#FFE9B4" />
           </Link>
         </motion.div>
       </div>

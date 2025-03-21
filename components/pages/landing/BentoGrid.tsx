@@ -4,7 +4,7 @@ import { BentoCard } from "@/components/pages/landing/BentoCard";
 import { cn } from "@/lib/utils";
 
 import Chat from "@/assets/chat.svg";
-import Audio from "@/assets/audio.svg";
+import Pen from "@/assets/pen.svg";
 import Gemini from "@/assets/gemini.svg";
 
 export const BentoGrid = () => {
@@ -39,16 +39,16 @@ export const BentoGrid = () => {
         </BentoCard>
         <BentoCard className="flex-row flex-wrap" columnSpan={1}>
           <Image
-            src={Audio}
-            alt="Audio"
+            src={Pen}
+            alt="Pen"
             className={cn(
               "w-20 lg:w-24 text-primary transition-all duration-500",
               "group-hover:scale-110 group-hover:rotate-[-4deg]"
             )}
           />
           <h3 className="text-3xl lg:text-4xl font-bold ml-6 mt-4 transition-transform duration-500 group-hover:translate-x-2">
-            Voice
-            <br /> Mode
+            Writing
+            <br /> Review
           </h3>
         </BentoCard>
         <BentoCard className="flex-col" columnSpan={1}>
@@ -71,7 +71,7 @@ export const BentoGrid = () => {
               "group-hover:scale-105 group-hover:rotate-[-4deg]"
             )}
           >
-            $0<span className="text-2xl md:text-4xl text-primary">*</span>
+            $0
           </h3>
           <h3 className="text-3xl lg:text-4xl text-center font-bold ml-4 transition-transform duration-500 group-hover:translate-x-2">
             Free to <br className="hidden lg:block" /> Use
