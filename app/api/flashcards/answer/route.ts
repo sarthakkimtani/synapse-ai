@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { createClient } from "@/utils/supabase/server";
+import { ratelimit } from "@/lib/ratelimiter";
 import { redisClient } from "@/lib/redis";
 
 const answerSchema = z.object({
@@ -11,6 +12,13 @@ const answerSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  const ip = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+  const { success } = await ratelimit.limit(ip);
+
+  if (!success) {
+    return Response.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const json = await req.json();
   const parsed = answerSchema.safeParse(json);
   if (!parsed.success) {

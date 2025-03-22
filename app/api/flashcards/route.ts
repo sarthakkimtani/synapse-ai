@@ -7,12 +7,19 @@ import { FCExerciseSchema, SafeFCExerciseSchema } from "@/app/api/flashcards/sch
 import { enhancePromptWithParams } from "@/utils/exercise-params";
 import { createClient } from "@/utils/supabase/server";
 
+import { ratelimit } from "@/lib/ratelimiter";
 import { systemPrompt } from "@/lib/prompt";
 import { redisClient } from "@/lib/redis";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
+  const ip = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+  const { success } = await ratelimit.limit(ip);
+  if (!success) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const { prompt, lang } = await req.json();
   if (!prompt || !lang) {
     return NextResponse.json({ message: "Invalid Request Body" }, { status: 400 });
@@ -35,7 +42,7 @@ export async function POST(req: Request) {
 
     for (let i = 0; i < object.flashcards.length; i++) {
       const card = object.flashcards[i];
-      await redisClient.hset(redisKey, `card:${i}`, card.correctAnswer);
+      await redisClient.hset(redisKey, { [`card:${i}`]: card.correctAnswer });
     }
 
     const safeObject = SafeFCExerciseSchema.parse(object);
