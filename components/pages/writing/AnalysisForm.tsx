@@ -25,7 +25,7 @@ export const AnalysisForm = ({
   return (
     <>
       <motion.textarea
-        className="w-full h-64 lg:h-[90%] p-4 mb-4 bg-[#1E1F1E] text-white rounded-lg border transition duration-100 ease-linear border-neutral-700 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+        className="mb-4 h-64 w-full resize-none rounded-lg border border-neutral-700 bg-[#1E1F1E] p-4 text-white transition duration-100 ease-linear focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary lg:h-[90%]"
         placeholder="Enter your text for review..."
         value={text}
         onChange={handleChange}
@@ -33,11 +33,11 @@ export const AnalysisForm = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       />
-      <div className="flex flex-row w-full items-center justify-center lg:justify-between">
-        <p className="hidden lg:block text-gray-500 text-sm">{words} Words</p>
+      <div className="flex w-full flex-row items-center justify-center lg:justify-between">
+        <p className="hidden text-sm text-gray-500 lg:block">{words} Words</p>
         <div className="flex flex-row items-center">
           <LanguageSwitcher
-            className="bg-[#212221] rounded-3xl px-4 py-2 border border-primary hover:bg-[#2a2b2a] transition-colors duration-200 flex items-center justify-center"
+            className="flex items-center justify-center rounded-3xl border border-primary bg-[#212221] px-4 py-2 transition-colors duration-200 hover:bg-[#2a2b2a]"
             selectedLanguage={language}
             setSelectedLanguage={setLanguage}
           />
@@ -51,7 +51,7 @@ export const AnalysisForm = ({
                   setIsSubmitting(false);
                 }
               }}
-              className="px-6 py-2 ml-4 h-[42px] bg-primary text-black text-base font-medium rounded-3xl hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="ml-4 h-[42px] rounded-3xl bg-primary px-6 py-2 text-base font-medium text-black transition-all hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!language || !text || isSubmitting}
             >
               {isSubmitting ? "Analyzing..." : "Analyze Text"}

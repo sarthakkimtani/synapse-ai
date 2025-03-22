@@ -5,7 +5,7 @@ import { Brain } from "lucide-react";
 
 export const WritingLoader = () => (
   <motion.div
-    className="flex flex-col items-center justify-center w-full h-full"
+    className="flex h-full w-full flex-col items-center justify-center"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
@@ -16,15 +16,15 @@ export const WritingLoader = () => (
       animate={{ scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.div className="absolute w-20 h-20 rounded-full border-2 border-primary/30" />
+      <motion.div className="absolute h-20 w-20 rounded-full border-2 border-primary/30" />
 
       <motion.div
-        className="absolute w-20 h-20 rounded-full border-2 border-primary border-t-transparent border-l-transparent"
+        className="absolute h-20 w-20 rounded-full border-2 border-primary border-l-transparent border-t-transparent"
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
       />
       <motion.div
-        className="absolute w-14 h-14 rounded-full border-2 border-primary/40 border-b-transparent border-r-transparent"
+        className="absolute h-14 w-14 rounded-full border-2 border-primary/40 border-b-transparent border-r-transparent"
         animate={{ rotate: -360 }}
         transition={{ repeat: Infinity, duration: 2.2, ease: "linear" }}
       />
@@ -40,7 +40,7 @@ export const WritingLoader = () => (
           ease: "easeInOut",
         }}
       >
-        <Brain className="w-8 h-8 text-primary" />
+        <Brain className="h-8 w-8 text-primary" />
       </motion.div>
     </motion.div>
     <motion.div
@@ -50,7 +50,7 @@ export const WritingLoader = () => (
       transition={{ delay: 0.3, duration: 0.5 }}
     >
       <motion.p
-        className="text-lg text-neutral-300 font-medium mt-2"
+        className="mt-2 text-lg font-medium text-neutral-300"
         animate={{ opacity: [0.7, 1, 0.7] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >
@@ -63,7 +63,7 @@ export const WritingLoader = () => (
         </motion.span>
       </motion.p>
       <motion.p
-        className="text-sm text-neutral-500 mt-1"
+        className="mt-1 text-sm text-neutral-500"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}

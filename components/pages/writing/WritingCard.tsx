@@ -12,7 +12,7 @@ import { fetchWritingReview } from "@/lib/fetch";
 
 const Placeholder = () => (
   <motion.div
-    className="flex flex-col items-center justify-center w-full h-full"
+    className="flex h-full w-full flex-col items-center justify-center"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
@@ -22,13 +22,13 @@ const Placeholder = () => (
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Sparkles strokeWidth={1.3} className="text-neutral-500 mb-5" size={56} />
+      <Sparkles strokeWidth={1.3} className="mb-5 text-neutral-500" size={56} />
     </motion.div>
     <motion.p
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.2 }}
-      className="text-base text-neutral-500 text-center"
+      className="text-center text-base text-neutral-500"
     >
       Enter text to start analyzing your writing skills.
     </motion.p>
@@ -44,7 +44,7 @@ const ErrorBox = ({
 }) => {
   return (
     <motion.div
-      className="flex flex-col items-center justify-center w-full h-full"
+      className="flex h-full w-full flex-col items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -53,16 +53,16 @@ const ErrorBox = ({
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 w-full max-w-md"
+        className="w-full max-w-md rounded-lg border border-red-500/30 bg-red-500/10 p-4"
       >
-        <p className="text-red-500 font-medium mb-1">Error</p>
-        <p className="text-neutral-300 text-sm">{error}</p>
+        <p className="mb-1 font-medium text-red-500">Error</p>
+        <p className="text-sm text-neutral-300">{error}</p>
       </motion.div>
       <motion.button
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mt-4 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-md text-sm text-neutral-300 transition-colors"
+        className="mt-4 rounded-md bg-neutral-800 px-4 py-2 text-sm text-neutral-300 transition-colors hover:bg-neutral-700"
         onClick={() => setError(null)}
       >
         Dismiss
@@ -95,16 +95,16 @@ export const WritingCard = () => {
 
   return (
     <motion.div
-      className="flex flex-col lg:flex-row w-5/6 lg:h-[440px] mt-10 mb-14 lg:mb-0 rounded-xl bg-[#1E1F1E] shadow-[0px_0px_20px_theme(colors.primary)]"
+      className="mb-14 mt-10 flex w-5/6 flex-col rounded-xl bg-[#1E1F1E] shadow-[0px_0px_20px_theme(colors.primary)] lg:mb-0 lg:h-[440px] lg:flex-row"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex flex-col w-full lg:w-1/2 items-center justify-center p-6">
+      <div className="flex w-full flex-col items-center justify-center p-6 lg:w-1/2">
         <AnalysisForm onSubmit={handleSubmit} />
       </div>
-      <div className="flex items-center w-[1px] h-full bg-neutral-700" />
-      <div className="flex flex-col items-center justify-center mt-2 lg:mt-0 lg:w-1/2 w-full p-6 h-full overflow-hidden">
+      <div className="flex h-full w-[1px] items-center bg-neutral-700" />
+      <div className="mt-2 flex h-full w-full flex-col items-center justify-center overflow-hidden p-6 lg:mt-0 lg:w-1/2">
         {isLoading ? (
           <WritingLoader />
         ) : error ? (

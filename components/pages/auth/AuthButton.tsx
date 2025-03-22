@@ -37,7 +37,7 @@ export const AuthButton = ({ className, variant }: AuthButtonProps) => {
   return (
     <button
       className={cn(
-        "flex flex-row items-center justify-center w-[275px] md:w-72 h-12 bg-[#1E1E1E] hover:bg-[#2F2F2F] transition duration-150 ease-linear font-semibold font-xl rounded-xl",
+        "font-xl flex h-12 w-[275px] flex-row items-center justify-center rounded-xl bg-[#1E1E1E] font-semibold transition duration-150 ease-linear hover:bg-[#2F2F2F] md:w-72",
         className ?? ""
       )}
       onClick={handleAuth}

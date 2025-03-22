@@ -116,7 +116,7 @@ export const WritingAnalysis = ({ text }: { text: string }) => {
             {segment.text}
           </motion.span>
         </TooltipTrigger>
-        <TooltipContent className="bg-[#333533] text-sm text-white border border-neutral-700">
+        <TooltipContent className="border border-neutral-700 bg-[#333533] text-sm text-white">
           {segment.comment}
         </TooltipContent>
       </Tooltip>
@@ -136,14 +136,14 @@ export const WritingAnalysis = ({ text }: { text: string }) => {
 
   return (
     <TooltipProvider>
-      <div className="w-full h-full flex flex-col">
+      <div className="flex h-full w-full flex-col">
         <motion.div
-          className="mb-4 p-3 rounded-lg bg-[#212221] border border-neutral-700"
+          className="mb-4 rounded-lg border border-neutral-700 bg-[#212221] p-3"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <h3 className="text-neutral-300 font-medium mb-2">Writing Analysis</h3>
+          <h3 className="mb-2 font-medium text-neutral-300">Writing Analysis</h3>
           <div className="flex flex-wrap gap-3">
             <motion.div
               className="flex items-center gap-1.5"
@@ -170,7 +170,7 @@ export const WritingAnalysis = ({ text }: { text: string }) => {
           </div>
         </motion.div>
         <motion.div
-          className="w-full flex-1 overflow-y-auto overflow-x-hidden text-white p-2 break-words max-h-[calc(100%-100px)]"
+          className="max-h-[calc(100%-100px)] w-full flex-1 overflow-y-auto overflow-x-hidden break-words p-2 text-white"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

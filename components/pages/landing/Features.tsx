@@ -3,13 +3,13 @@ import { BentoGrid } from "@/components/pages/landing/BentoGrid";
 
 export const Features = () => {
   return (
-    <section id="features" className="pt-56 relative overflow-hidden">
-      <h1 className="text-3xl md:text-5xl px-4 font-bold text-center flex flex-wrap justify-center items-center mt-10 md:mt-20 mb-10 md:mb-0">
-        Your<span className="text-primary w-40 md:w-60"> AI Partner </span>for Real-World Fluency
+    <section id="features" className="relative overflow-hidden pt-56">
+      <h1 className="mb-10 mt-10 flex flex-wrap items-center justify-center px-4 text-center text-3xl font-bold md:mb-0 md:mt-20 md:text-5xl">
+        Your<span className="w-40 text-primary md:w-60"> AI Partner </span>for Real-World Fluency
       </h1>
       <BentoGrid />
-      <LightFiller className="-right-[340px] w-[1250px] top-[360px] rotate-90 -z-10" />
-      <LightFiller className="-left-[340px] w-[1250px] top-[360px] -rotate-90 -z-10" />
+      <LightFiller className="-right-[340px] top-[360px] -z-10 w-[1250px] rotate-90" />
+      <LightFiller className="-left-[340px] top-[360px] -z-10 w-[1250px] -rotate-90" />
     </section>
   );
 };

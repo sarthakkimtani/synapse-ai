@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 export const Title = ({ children }: { children: React.ReactNode }) => {
   return (
     <motion.h1
-      className="text-3xl md:text-5xl px-4 font-bold text-center flex flex-wrap justify-center items-center mt-16 md:mt-20 mb-10 md:mb-20"
+      className="mb-10 mt-16 flex flex-wrap items-center justify-center px-4 text-center text-3xl font-bold md:mb-20 md:mt-20 md:text-5xl"
       animate={{ scale: 1 }}
       initial={{ scale: 0.9 }}
     >

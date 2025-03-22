@@ -16,7 +16,7 @@ export const AppNavbar = ({ className }: { className?: string }) => {
       <Link
         href={projectLink}
         target="_blank"
-        className="flex bg-primary text-black px-5 cursor-pointer py-4 items-center text-md rounded-[30px]"
+        className="text-md flex cursor-pointer items-center rounded-[30px] bg-primary px-5 py-4 text-black"
       >
         GitHub
         <Image src={GitHub} className="ml-3 w-6" draggable={false} alt="GitHub" />

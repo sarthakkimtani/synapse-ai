@@ -12,7 +12,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
   return (
     <a
       href={href}
-      className="px-4 py-2 rounded-2xl font-medium cursor-pointer text-white transition ease-in-out hover:bg-zinc-800"
+      className="cursor-pointer rounded-2xl px-4 py-2 font-medium text-white transition ease-in-out hover:bg-zinc-800"
     >
       {children}
     </a>
@@ -21,29 +21,29 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-center mt-4">
-      <div className="w-[98%] flex flex-col items-center rounded-2xl mb-4 bg-[#1E1F1E] shadow-[inset_0px_0px_20px_rgba(255,225,153,0.15)]">
-        <div className="flex flex-row items-center mt-12">
+    <footer className="mt-4 flex flex-col items-center justify-center">
+      <div className="mb-4 flex w-[98%] flex-col items-center rounded-2xl bg-[#1E1F1E] shadow-[inset_0px_0px_20px_rgba(255,225,153,0.15)]">
+        <div className="mt-12 flex flex-row items-center">
           <Image className="cursor-pointer" src={Brand} draggable={false} alt="Brand" width={150} />
         </div>
-        <div className="flex flex-row items-center mt-8">
+        <div className="mt-8 flex flex-row items-center">
           <FooterLink href="#">Home</FooterLink>
           <FooterLink href="#">About</FooterLink>
           <FooterLink href="#features">Features</FooterLink>
         </div>
-        <div className="flex flex-row items-center mt-6">
+        <div className="mt-6 flex flex-row items-center">
           <Link href={linkedinLink} target="_blank">
             <Image className="w-6 cursor-pointer" src={LinkedInIcon} alt="linkedin" />
           </Link>
           <Link href={githubLink} target="_blank">
-            <Image className="w-6 ml-4 cursor-pointer" src={GitHubIcon} alt="github" />
+            <Image className="ml-4 w-6 cursor-pointer" src={GitHubIcon} alt="github" />
           </Link>
           <Link href={xLink} target="_blank">
-            <Image className="w-6 ml-4 cursor-pointer" src={XIcon} alt="x" />
+            <Image className="ml-4 w-6 cursor-pointer" src={XIcon} alt="x" />
           </Link>
         </div>
-        <div className="w-full border-[0.5px] border-zinc-700 mt-10" />
-        <span className="text-md text-zinc-600 my-5">
+        <div className="mt-10 w-full border-[0.5px] border-zinc-700" />
+        <span className="text-md my-5 text-zinc-600">
           &copy; {new Date().getFullYear()}, All Rights Reserved
         </span>
       </div>

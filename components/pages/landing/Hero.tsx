@@ -9,7 +9,7 @@ export const Hero = () => {
     <section>
       <AnimatedTitle />
       <div className="flex items-center justify-center overflow-hidden">
-        <Image className="w-full md:scale-100 scale-125" draggable={false} src={Node} alt="Node" />
+        <Image className="w-full scale-125 md:scale-100" draggable={false} src={Node} alt="Node" />
       </div>
     </section>
   );

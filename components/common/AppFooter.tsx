@@ -8,12 +8,18 @@ import XIcon from "@/assets/brands/x-primary.svg";
 import LinkedInIcon from "@/assets/brands/linkedin-primary.svg";
 import GitHubIcon from "@/assets/brands/github-primary.svg";
 
-const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
+const FooterLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => {
   return (
     <Link
       href={href}
       target="_blank"
-      className="flex items-center justify-center w-12 h-12 ml-4 bg-transparent cursor-pointer rounded-2xl bg-[#171817] border border-primary"
+      className="ml-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl border border-primary bg-[#171817] bg-transparent"
     >
       {children}
     </Link>
@@ -22,7 +28,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export const AppFooter = () => {
   return (
-    <div className="absolute bottom-0 flex flex-row items-center justify-center w-full py-8 text-center text-white">
+    <div className="absolute bottom-0 flex w-full flex-row items-center justify-center py-8 text-center text-white">
       <FooterLink href={linkedinLink}>
         <Image src={LinkedInIcon} alt="Linkedin" height={24} />
       </FooterLink>

@@ -4,13 +4,13 @@ import { RouteButton } from "@/components/common/RouteButton";
 
 export const GetStarted = () => {
   return (
-    <section className="pt-24 relative overflow-hidden">
-      <h1 className="text-3xl md:text-5xl px-4 font-bold text-center flex flex-wrap justify-center items-center mt-10 md:mt-20 mb-10 md:mb-0">
-        Ready to Take The Leap with<span className="text-primary w-40 md:w-60"> Synapse?</span>
+    <section className="relative overflow-hidden pt-24">
+      <h1 className="mb-10 mt-10 flex flex-wrap items-center justify-center px-4 text-center text-3xl font-bold md:mb-0 md:mt-20 md:text-5xl">
+        Ready to Take The Leap with<span className="w-40 text-primary md:w-60"> Synapse?</span>
       </h1>
-      <div className="w-full flex flex-col justify-center items-center py-44">
+      <div className="flex w-full flex-col items-center justify-center py-44">
         <RouteButton
-          className="w-2/3 md:w-1/3 lg:w-1/4 h-24 rounded-[50px] font-semibold shadow-[0_0_75px_theme(colors.primary)]"
+          className="h-24 w-2/3 rounded-[50px] font-semibold shadow-[0_0_75px_theme(colors.primary)] md:w-1/3 lg:w-1/4"
           routeTo="/exercise"
         >
           <span className="text-2xl lg:text-3xl">Get Started</span>

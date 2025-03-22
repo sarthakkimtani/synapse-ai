@@ -36,13 +36,10 @@ export const LanguageSwitcher = ({
         </div>
         <ChevronDown strokeWidth={1} />
       </PopoverTrigger>
-      <PopoverContent className="grid grid-cols-2 gap-2 bg-[#171817] text-white border border-[#353535] p-2 rounded-lg shadow-lg">
+      <PopoverContent className="grid grid-cols-2 gap-2 rounded-lg border border-[#353535] bg-[#171817] p-2 text-white shadow-lg">
         {languages.map((lang) => (
           <button
-            className={`
-              w-full text-left text-md p-2 transition-colors duration-200 rounded-md
-              ${selectedLanguage === lang.value ? "bg-[#282824]" : "hover:bg-[#2a2b2a]"}
-            `}
+            className={`text-md w-full rounded-md p-2 text-left transition-colors duration-200 ${selectedLanguage === lang.value ? "bg-[#282824]" : "hover:bg-[#2a2b2a]"} `}
             key={lang.value}
             onClick={() => switchLanguage(lang.value)}
           >
