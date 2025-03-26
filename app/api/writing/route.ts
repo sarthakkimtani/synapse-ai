@@ -1,26 +1,39 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
+import { z } from "zod";
 
 import { systemPrompt } from "@/lib/prompt";
-import { ratelimit } from "@/lib/ratelimiter";
+import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 
 export const maxDuration = 30;
 
-export async function POST(req: Request) {
-  const ip = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
-  const { success } = await ratelimit.limit(ip);
-  const { prompt } = await req.json();
+const requestSchema = z.object({
+  prompt: z.string(),
+});
 
-  if (!success) {
-    return Response.json({ error: "Too many requests" }, { status: 429 });
-  }
+export async function POST(req: NextRequest) {
+  return withRateLimit(req, async () => {
+    try {
+      const body = await req.json();
+      const validation = requestSchema.safeParse(body);
+      
+      if (!validation.success) {
+        return errorResponse("Invalid request format", 400);
+      }
+      
+      const { prompt } = validation.data;
 
-  const { text } = await generateText({
-    model: google("gemini-1.5-flash"),
-    system: systemPrompt,
-    prompt,
+      const { text } = await generateText({
+        model: google("gemini-1.5-flash"),
+        system: systemPrompt,
+        prompt,
+      });
+
+      return successResponse({ text });
+    } catch (error) {
+      console.error("Writing generation error:", error);
+      return errorResponse("Failed to generate writing content", 500);
+    }
   });
-
-  return NextResponse.json(text);
 }

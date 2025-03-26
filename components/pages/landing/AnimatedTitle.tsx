@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { usePhraseAnimation } from "@/hooks/usePhraseAnimation";
 
-export const AnimatedTitle = () => {
+const AnimatedTitleComponent = () => {
   const phrases = ["AI-First", "エーアイ", "एआई-प्रथम"];
   const { currentPhrase, isLoading } = usePhraseAnimation(phrases, 2500);
 
@@ -20,6 +21,7 @@ export const AnimatedTitle = () => {
             transition={{
               duration: 0.5,
               ease: "easeOut",
+              willChange: "opacity, transform",
             }}
             className="inline-block w-40 text-primary md:w-60"
           >
@@ -31,3 +33,5 @@ export const AnimatedTitle = () => {
     </h1>
   );
 };
+
+export const AnimatedTitle = memo(AnimatedTitleComponent);

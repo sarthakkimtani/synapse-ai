@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { memo } from "react";
 
 import { BentoCard } from "@/components/pages/landing/BentoCard";
 import { cn } from "@/lib/utils";
@@ -7,7 +8,7 @@ import Chat from "@/assets/chat.svg";
 import Pen from "@/assets/pen.svg";
 import Gemini from "@/assets/gemini.svg";
 
-export const BentoGrid = () => {
+const BentoGridComponent = () => {
   return (
     <div className="mt-14 min-h-screen bg-transparent p-6 lg:p-8">
       <div className="mx-auto grid max-w-6xl auto-rows-[250px] grid-cols-1 gap-x-5 gap-y-5 md:grid-cols-3">
@@ -19,6 +20,7 @@ export const BentoGrid = () => {
               "w-24 text-primary transition-all duration-500 lg:w-32",
               "group-hover:rotate-[-4deg] group-hover:scale-110"
             )}
+            loading="lazy"
           />
           <h3 className="mt-4 text-center text-3xl font-bold transition-transform duration-500 group-hover:translate-x-2">
             Conversational AI
@@ -45,6 +47,7 @@ export const BentoGrid = () => {
               "w-20 text-primary transition-all duration-500 lg:w-24",
               "group-hover:rotate-[-4deg] group-hover:scale-110"
             )}
+            loading="lazy"
           />
           <h3 className="ml-6 mt-4 text-3xl font-bold transition-transform duration-500 group-hover:translate-x-2 lg:text-4xl">
             Writing
@@ -62,6 +65,7 @@ export const BentoGrid = () => {
               "w-40 text-primary transition-all duration-500 lg:w-48",
               "group-hover:rotate-[-4deg] group-hover:scale-110"
             )}
+            loading="lazy"
           />
         </BentoCard>
         <BentoCard className="flex-col lg:flex-row" columnSpan={1}>
@@ -81,3 +85,5 @@ export const BentoGrid = () => {
     </div>
   );
 };
+
+export const BentoGrid = memo(BentoGridComponent);

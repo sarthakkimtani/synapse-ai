@@ -81,8 +81,8 @@ export const WritingCard = () => {
       if (language == "" || text == "") return;
       setIsLoading(true);
       setError(null);
-      const data: string = await fetchWritingReview(language, text);
-      setReviewResponse(data);
+      const response = await fetchWritingReview(language, text);
+      setReviewResponse(response.data.text);
     } catch (error) {
       console.error("Error analyzing writing:", error);
       setError(
