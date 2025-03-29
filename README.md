@@ -1,7 +1,5 @@
 # Synapse AI
 
-![Synapse AI](https://github.com/sarthakkimtani/synapse-ai/blob/main/app/opengraph-image.png)
-
 Synapse AI is a modern web platform leveraging AI to transform language learning through interactive exercises, flashcards, role-play conversations, and writing assistance.
 
 ## 🌟 Features
