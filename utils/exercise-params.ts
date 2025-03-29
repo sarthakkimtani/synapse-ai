@@ -1,4 +1,4 @@
-export const exerciseParameters = {
+const exerciseParameters = {
   topics: [
     "daily life",
     "food and dining",
@@ -30,10 +30,6 @@ export const exerciseParameters = {
     "at a sports venue",
   ] as const,
 } as const;
-
-export type Topic = (typeof exerciseParameters.topics)[number];
-export type Level = (typeof exerciseParameters.levels)[number];
-export type Context = (typeof exerciseParameters.contexts)[number];
 
 const getRandomParameter = <T>(array: readonly T[]): T => {
   return array[Math.floor(Math.random() * array.length)];

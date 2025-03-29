@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { z } from "zod";
 
 import { createClient } from "@/utils/supabase/server";
 import { redisClient } from "@/lib/redis";
+import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 
 const answerSchema = z.object({
   lang: z.string(),
@@ -10,30 +11,37 @@ const answerSchema = z.object({
   answer: z.string(),
 });
 
-export async function POST(req: Request) {
-  const json = await req.json();
-  const parsed = answerSchema.safeParse(json);
-  if (!parsed.success) {
-    return NextResponse.json({ message: parsed.error.message }, { status: 400 });
-  }
+export async function POST(req: NextRequest) {
+  return withRateLimit(req, async () => {
+    try {
+      const body = await req.json();
+      const validation = answerSchema.safeParse(body);
+      
+      if (!validation.success) {
+        return errorResponse(validation.error.message, 400);
+      }
+      
+      const { lang, index, answer } = validation.data;
 
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getSession();
-  const user = data.session?.user;
+      const supabase = await createClient();
+      const { data } = await supabase.auth.getSession();
+      const user = data.session?.user;
 
-  try {
-    const { lang, index, answer } = parsed.data;
-    const redisKey = `user:${user?.id}:${lang}:flashcards`;
-    const field = `card:${index}`;
-    const correctAnswer = await redisClient.hget(redisKey, field);
+      const redisKey = `user:${user?.id}:${lang}:flashcards`;
+      const field = `card:${index}`;
+      const correctAnswer = await redisClient.hget(redisKey, field);
 
-    if (!correctAnswer) {
-      return NextResponse.json({ message: "Flashcard not found" }, { status: 404 });
+      if (!correctAnswer) {
+        return errorResponse("Flashcard not found", 404);
+      }
+
+      return successResponse({ 
+        correctAnswer, 
+        isCorrect: answer === correctAnswer 
+      });
+    } catch (error) {
+      console.error("Error checking answer:", error);
+      return errorResponse("Failed to check answer", 500);
     }
-
-    return NextResponse.json({ correctAnswer, isCorrect: answer === correctAnswer });
-  } catch (error) {
-    console.error("Error checking answer:", error);
-    return NextResponse.json({ error: "Failed to check answer" }, { status: 500 });
-  }
+  });
 }

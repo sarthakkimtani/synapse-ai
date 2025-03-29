@@ -51,7 +51,7 @@ export const ChatBubbleList = ({
             key={m.id}
             className={cn(
               "flex gap-3 text-sm sm:text-base",
-              m.role === "user" ? "justify-end" : "justify-start items-start"
+              m.role === "user" ? "justify-end" : "items-start justify-start"
             )}
           >
             {m.role === "assistant" && (
@@ -66,7 +66,7 @@ export const ChatBubbleList = ({
             )}
             <div
               className={cn(
-                "rounded-2xl px-4 py-2 max-w-[85%] animate-in slide-in-from-bottom-2 group",
+                "group max-w-[85%] rounded-2xl px-4 py-2 animate-in slide-in-from-bottom-2",
                 m.role === "user"
                   ? "bg-primary text-zinc-900"
                   : "bg-zinc-800 text-white shadow-[inset_0px_0px_5px_rgba(255,225,153,0.25)]"
@@ -75,8 +75,8 @@ export const ChatBubbleList = ({
               {m.role === "assistant" && translation ? (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="prose break-words dark:prose-invert group">
-                      <span className="underline decoration-dashed underline-offset-8 decoration-zinc-500 p-1 leading-7 md:leading-8 inline-flex items-center gap-2">
+                    <div className="prose dark:prose-invert group break-words">
+                      <span className="inline-flex items-center gap-2 p-1 leading-7 underline decoration-zinc-500 decoration-dashed underline-offset-8 md:leading-8">
                         {original}
                       </span>
                     </div>
@@ -84,7 +84,7 @@ export const ChatBubbleList = ({
                   <TooltipContent
                     side="top"
                     align="center"
-                    className="bg-[#FEF9EC] border-transparent text-black text-sm backdrop-blur-sm p-2 w-full"
+                    className="w-full border-transparent bg-[#FEF9EC] p-2 text-sm text-black backdrop-blur-sm"
                   >
                     <div className="flex items-center gap-2">
                       <p className="text-md font-medium">{translation}</p>
@@ -92,7 +92,7 @@ export const ChatBubbleList = ({
                   </TooltipContent>
                 </Tooltip>
               ) : (
-                <div className="prose break-words dark:prose-invert">{original}</div>
+                <div className="prose dark:prose-invert break-words">{original}</div>
               )}
             </div>
           </div>

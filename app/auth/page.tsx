@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import { createClient } from "@/utils/supabase/server";
 import { AuthButton } from "@/components/pages/auth/AuthButton";
+import { createClient } from "@/utils/supabase/server";
 
 import Grid from "@/assets/grid.svg";
 
@@ -15,7 +15,7 @@ export default async function Auth() {
   const { data } = await supabase.auth.getUser();
 
   if (data?.user) {
-    redirect("/chat");
+    redirect("/exercise");
   }
 
   return (

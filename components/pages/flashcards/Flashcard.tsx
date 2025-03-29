@@ -53,12 +53,12 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
   return (
     <div className="w-full max-w-md">
       <div
-        className="relative h-[400px] w-full cursor-pointer preserve-3d"
+        className="preserve-3d relative h-[400px] w-full cursor-pointer"
         style={{ perspective: "1000px" }}
         onClick={handleFlip}
       >
         <motion.div
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 h-full w-full"
           animate={{
             rotateY: isFlipped ? 180 : 0,
           }}
@@ -72,16 +72,16 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
           }}
         >
           {!isFlipped && (
-            <div className="absolute inset-0 w-full h-full backface-hidden bg-primary rounded-3xl shadow-lg p-8 flex flex-col items-center justify-center">
-              <h2 className="text-5xl text-center font-bold mb-4">{card.term}</h2>
+            <div className="backface-hidden absolute inset-0 flex h-full w-full flex-col items-center justify-center rounded-3xl bg-primary p-8 shadow-lg">
+              <h2 className="mb-4 text-center text-5xl font-bold">{card.term}</h2>
               {card.exampleSentence && (
-                <p className="text-md text-center italic mt-4">{card.exampleSentence}</p>
+                <p className="text-md mt-4 text-center italic">{card.exampleSentence}</p>
               )}
-              <p className="text-sm mt-8">Click to flip</p>
+              <p className="mt-8 text-sm">Click to flip</p>
             </div>
           )}
           {isFlipped && (
-            <div className="absolute inset-0 w-full h-full backface-hidden flex flex-col items-center justify-center bg-primary rounded-3xl shadow-lg p-6 [transform:rotateY(180deg)]">
+            <div className="backface-hidden absolute inset-0 flex h-full w-full flex-col items-center justify-center rounded-3xl bg-primary p-6 shadow-lg [transform:rotateY(180deg)]">
               <div className="w-full space-y-3">
                 {card.options.map((option, index) => (
                   <button
@@ -92,7 +92,7 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
                     }}
                     disabled={hasAnswered}
                     className={cn(
-                      "w-full bg-white border-yellow-100 p-4 text-left rounded-xl border-2 transition-all",
+                      "w-full rounded-xl border-2 border-yellow-100 bg-white p-4 text-left transition-all",
                       "hover:border-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2",
                       hasAnswered &&
                         option === selectedAnswer &&

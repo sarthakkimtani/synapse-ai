@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { motion, AnimatePresence } from "motion/react";
-import { AudioLinesIcon, Play } from "lucide-react";
+import { PenTool, Play } from "lucide-react";
 
-import { LanguageSwitcher } from "@/components/pages/exercise/LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/common/LanguageSwitcher";
 import { ModeSwitcher } from "@/components/pages/exercise/ModeSwitcher";
 
 const FormButtons = () => {
@@ -26,15 +26,16 @@ const FormButtons = () => {
   return (
     <motion.div
       layoutId="expandable"
-      className="flex flex-col md:flex-row items-center"
+      className="flex flex-col items-center md:flex-row"
       onClick={handleClick}
     >
-      <button className="w-full md:w-auto h-16 flex items-center justify-center text-lg bg-primary hover:bg-yellow-50 transition-colors duration-150 ease-linear px-5 rounded-xl text-black shadow-[0px_0px_20px_theme(colors.primary)]">
-        <Play size={20} className="text-black mr-3" />
-        <span className="font-semibold whitespace-nowrap text-lg">Start Exercise</span>
+      <button className="flex h-16 w-full items-center justify-center rounded-xl bg-primary px-5 text-lg text-black shadow-[0px_0px_20px_theme(colors.primary)] transition-colors duration-150 ease-linear hover:bg-yellow-50 md:w-auto">
+        <Play size={20} className="mr-3 text-black" />
+        <span className="whitespace-nowrap text-lg font-semibold">Start Exercise</span>
       </button>
-      <div className="flex flex-col md:flex-row items-center w-full my-5 md:my-0">
+      <div className="my-5 flex w-full flex-col items-center md:my-0 md:flex-row">
         <LanguageSwitcher
+          className="mb-8 ml-0 flex h-16 w-full items-center justify-center rounded-xl bg-[#212221] px-4 py-2 text-lg shadow-[0px_0px_20px_theme(colors.primary)] transition-colors duration-200 hover:bg-[#2a2b2a] md:mb-0 md:w-auto lg:ml-10"
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}
         />
@@ -47,14 +48,14 @@ const FormButtons = () => {
 export const ExerciseForm = () => {
   return (
     <AnimatePresence mode="wait">
-      <div className="flex flex-col md:flex-row items-center w-full justify-center z-0">
+      <div className="z-0 flex w-full flex-col items-center justify-center md:flex-row">
         <FormButtons />
         <motion.div layoutId="shrinkable" className="flex-shrink-0">
           <Link
-            href="/voice"
-            className="hidden md:flex items-center justify-center w-16 h-16 bg-[#171817] cursor-pointer rounded-xl ml-4 md:ml-8 shadow-[0px_0px_20px_theme(colors.primary)]"
+            href="/writing"
+            className="ml-4 hidden h-16 w-16 cursor-pointer items-center justify-center rounded-xl bg-[#171817] shadow-[0px_0px_20px_theme(colors.primary)] md:ml-8 md:flex"
           >
-            <AudioLinesIcon size={28} color="#FFE9B4" />
+            <PenTool size={28} color="#FFE9B4" />
           </Link>
         </motion.div>
       </div>

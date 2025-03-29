@@ -35,13 +35,13 @@ export const FlashcardInterface = ({ flashcards }: FlashcardInterfaceProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full p-6 mt-20 flex flex-col items-center justify-center text-black">
+      <div className="mt-20 flex w-full flex-col items-center justify-center p-6 text-black">
         <motion.div
           initial={{ width: 0 }}
           animate={{
             width: `${((currentIndex + 1) / flashcards.length) * 100}%`,
           }}
-          className="h-1 bg-primary fixed top-0 left-0 z-50"
+          className="fixed left-0 top-0 z-50 h-1 bg-primary"
         />
         {isCompleted ? (
           <CompletionCard correct={correctAnswers} total={flashcards.length} />
@@ -54,7 +54,7 @@ export const FlashcardInterface = ({ flashcards }: FlashcardInterfaceProps) => {
               onAnswer={handleAnswer}
               onNext={handleNext}
             />
-            <h6 className="text-center font-semibold text-2xl text-primary mt-10">
+            <h6 className="mt-10 text-center text-2xl font-semibold text-primary">
               Correct Answers: {correctAnswers} / {flashcards.length}
             </h6>
           </>
