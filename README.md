@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Synapse AI
 
-## Getting Started
+![Synapse AI](https://github.com/sarthakkimtani/synapse-ai/blob/main/app/opengraph-image.png)
 
-First, run the development server:
+Synapse AI is a modern web platform leveraging AI to transform language learning through interactive exercises, flashcards, role-play conversations, and writing assistance.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Features
+
+- **Conversational AI**: Practice language skills through natural conversations
+- **Flashcards**: Study vocabulary and phrases with AI-generated flashcards
+- **Role-Play**: Chat with different characters to practice conversational skills
+- **Writing Review**: Get AI-powered grammar and style suggestions for your writing
+- **Multi-language Support**: Learn over 40+ languages
+- **Free to Use**: All features available at no cost
+
+## 🚀 Technologies
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: TailwindCSS, Motion (previously Framer Motion) for animations
+- **AI Integration**: Google AI SDK, AI SDK
+- **Authentication**: Supabase
+- **Rate Limiting**: Upstash Redis
+
+## 📋 Prerequisites
+
+- Node.js 18.0 or higher
+- npm, yarn, or bun
+
+## 🛠️ Getting Started
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/sarthakkimtani/synapse-ai.git
+   cd synapse-ai
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory with the following variables:
+
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   GOOGLE_API_KEY=your_google_api_key
+   UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+   UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
+   ```
+
+4. Run the development server:
+
+   ```bash
+   pnpm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🏗️ Project Structure
+
+```
+synapse-ai/
+├── app/                  # Next.js App Router
+│   ├── api/              # API routes
+│   ├── auth/             # Authentication pages
+│   ├── exercise/         # Exercise pages
+│   └── writing/          # Writing review page
+├── assets/               # Static assets and SVGs
+├── components/           # React components
+├── lib/                  # Utility libraries
+├── public/               # Public assets
+├── utils/                # Utility functions
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤝 Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Learn More
+## 📄 License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
