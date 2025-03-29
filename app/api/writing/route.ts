@@ -3,7 +3,7 @@ import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { z } from "zod";
 
-import { systemPrompt } from "@/lib/prompt";
+import { writingPrompt } from "@/lib/prompt";
 import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 
 export const maxDuration = 30;
@@ -17,16 +17,16 @@ export async function POST(req: NextRequest) {
     try {
       const body = await req.json();
       const validation = requestSchema.safeParse(body);
-      
+
       if (!validation.success) {
         return errorResponse("Invalid request format", 400);
       }
-      
+
       const { prompt } = validation.data;
 
       const { text } = await generateText({
         model: google("gemini-1.5-flash"),
-        system: systemPrompt,
+        system: writingPrompt,
         prompt,
       });
 
