@@ -24,8 +24,8 @@ export default function FlashcardExercise() {
   useEffect(() => {
     const callAPI = async () => {
       try {
-        const data: SafeFCExercise = await fetchFlashcardExercise(lang);
-        setExercise(data);
+        const response = await fetchFlashcardExercise(lang);
+        setExercise(response.data);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -44,7 +44,7 @@ export default function FlashcardExercise() {
   return (
     <section>
       <Image src={Grid} className="-z-10 object-cover" fill alt="Grid" />
-      <p className="text-primary mt-10 text-center">
+      <p className="mt-10 text-center text-primary">
         Synapse may make mistakes. Please use with discretion.
       </p>
       <FlashcardInterface {...exercise} />
