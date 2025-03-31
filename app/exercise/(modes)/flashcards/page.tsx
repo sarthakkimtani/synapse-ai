@@ -24,8 +24,8 @@ function FlashcardPage() {
   useEffect(() => {
     const callAPI = async () => {
       try {
-        const data: SafeFCExercise = await fetchFlashcardExercise(lang);
-        setExercise(data);
+        const response = await fetchFlashcardExercise(lang);
+        setExercise(response.data);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
