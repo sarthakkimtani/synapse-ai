@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { RouteButton } from "@/components/common/RouteButton";
-
 import Brand from "@/assets/brand.svg";
 import { Rocket } from "lucide-react";
 
@@ -23,10 +21,13 @@ export const Navbar = () => {
           Features
         </a>
       </div>
-      <RouteButton className="rounded-[30px] text-sm" routeTo="/exercise">
+      <Link
+        href="/exercise"
+        className="flex flex-row items-center justify-center rounded-[30px] bg-primary px-3 py-3 text-center text-sm font-medium text-black transition duration-150 ease-in-out hover:bg-yellow-50 md:px-6 md:py-4 md:text-base lg:text-base"
+      >
         Get Started
         <Rocket className="ml-2" size={20} />
-      </RouteButton>
+      </Link>
     </nav>
   );
 };
