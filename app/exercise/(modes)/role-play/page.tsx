@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Home } from "lucide-react";
 import { useChat } from "ai/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "nextjs-toploader/app";
 import { useSearchParams } from "next/navigation";
 
@@ -11,12 +11,13 @@ import { ChatBubbleList } from "@/components/pages/role-play/ChatBubbleList";
 import { LoadingBubble } from "@/components/pages/role-play/LoadingBubble";
 import { MessageBox } from "@/components/pages/role-play/MessageBox";
 import { ErrorAlert } from "@/components/pages/role-play/ErrorAlert";
+import { AILoader } from "@/components/common/AILoader";
 import { Button } from "@/components/ui/button";
 
 import { enhancePromptWithParams } from "@/utils/exercise-params";
 import Grid from "@/assets/grid.svg";
 
-export default function Chat() {
+function ChatContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
@@ -69,5 +70,13 @@ export default function Chat() {
         />
       )}
     </main>
+  );
+}
+
+export default function Chat() {
+  return (
+    <Suspense fallback={<AILoader />}>
+      <ChatContent />
+    </Suspense>
   );
 }
