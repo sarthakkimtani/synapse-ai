@@ -33,15 +33,15 @@ export const Flashcard = ({ card, lang, index, onAnswer, onNext }: FlashcardProp
   };
 
   const handleAnswerSelect = async (answer: string) => {
-    const siteUrl = process.env.NEXT_PUBLIC_URL;
-    const response = await fetch(`${siteUrl}/api/flashcards/answer`, {
+    const fetchAnswer = await fetch("/api/flashcards/answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ lang, index, answer }),
     });
-    const { isCorrect: correct } = await response.json();
+    const response = await fetchAnswer.json();
+    const { isCorrect: correct } = response.data;
 
     setSelectedAnswer(answer);
     setHasAnswered(true);

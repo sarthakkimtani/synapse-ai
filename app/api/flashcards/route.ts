@@ -4,11 +4,11 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 
 import { FCExerciseSchema, SafeFCExerciseSchema } from "@/app/api/flashcards/schema";
+import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 import { enhancePromptWithParams } from "@/utils/exercise-params";
 import { createClient } from "@/utils/supabase/server";
 import { systemPrompt } from "@/lib/prompt";
 import { redisClient } from "@/lib/redis";
-import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 
 export const maxDuration = 30;
 
@@ -22,11 +22,11 @@ export async function POST(req: NextRequest) {
     try {
       const body = await req.json();
       const validation = requestSchema.safeParse(body);
-      
+
       if (!validation.success) {
         return errorResponse("Invalid request format", 400);
       }
-      
+
       const { prompt, lang } = validation.data;
 
       const supabase = await createClient();
@@ -42,11 +42,16 @@ export async function POST(req: NextRequest) {
       });
 
       const redisKey = `user:${user?.id}:${lang}:flashcards`;
+      const flashcardsObject = object.flashcards.reduce(
+        (acc: Record<string, string>, card, index) => {
+          acc[`card:${index}`] = card.correctAnswer;
+          return acc;
+        },
+        {}
+      );
 
-      for (let i = 0; i < object.flashcards.length; i++) {
-        const card = object.flashcards[i];
-        await redisClient.hset(redisKey, { [`card:${i}`]: card.correctAnswer });
-      }
+      await redisClient.hset(redisKey, flashcardsObject);
+      await redisClient.expire(redisKey, 1800);
 
       const safeObject = SafeFCExerciseSchema.parse(object);
       return successResponse(safeObject);
