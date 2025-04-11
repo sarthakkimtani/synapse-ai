@@ -13,6 +13,7 @@ export default {
     extend: {
       colors: {
         primary: "#FFE9B4",
+        surface: "#1E1F1E",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -25,7 +25,7 @@ export const AnalysisForm = ({
   return (
     <>
       <motion.textarea
-        className="mb-4 h-64 w-full resize-none rounded-lg border border-neutral-700 bg-[#1E1F1E] p-4 text-white transition duration-100 ease-linear focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary lg:h-[90%]"
+        className="bg-surface mb-4 h-64 w-full resize-none rounded-lg border border-neutral-700 p-4 text-white transition duration-100 ease-linear focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary lg:h-[90%]"
         placeholder="Enter your text for review..."
         value={text}
         onChange={handleChange}
