@@ -22,7 +22,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 export const Footer = () => {
   return (
     <footer className="mt-4 flex flex-col items-center justify-center">
-      <div className="mb-4 flex w-[98%] flex-col items-center rounded-2xl bg-[#1E1F1E] shadow-[inset_0px_0px_20px_rgba(255,225,153,0.15)]">
+      <div className="bg-surface mb-4 flex w-[98%] flex-col items-center rounded-2xl shadow-[inset_0px_0px_20px_rgba(255,225,153,0.15)]">
         <div className="mt-12 flex flex-row items-center">
           <Image className="cursor-pointer" src={Brand} draggable={false} alt="Brand" width={150} />
         </div>

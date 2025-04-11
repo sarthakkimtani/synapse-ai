@@ -6,7 +6,7 @@ export const metadata = {
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen py-12">
-      <div className="mx-auto max-w-3xl rounded-xl bg-[#1E1F1E]/40 px-4 text-white shadow-sm sm:px-6 lg:px-8">
+      <div className="bg-surface/40 mx-auto max-w-3xl rounded-xl px-4 text-white shadow-sm sm:px-6 lg:px-8">
         <div className="py-8">
           <div className="mb-8">
             <h1 className="mb-2 text-3xl font-bold">Synapse Privacy Policy</h1>

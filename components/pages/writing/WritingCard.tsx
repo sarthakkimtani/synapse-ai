@@ -95,7 +95,7 @@ export const WritingCard = () => {
 
   return (
     <motion.div
-      className="mb-14 mt-10 flex w-5/6 flex-col rounded-xl bg-[#1E1F1E] shadow-[0px_0px_20px_theme(colors.primary)] lg:mb-0 lg:h-[440px] lg:flex-row"
+      className="bg-surface mb-14 mt-10 flex w-5/6 flex-col rounded-xl shadow-[0px_0px_20px_theme(colors.primary)] lg:mb-0 lg:h-[440px] lg:flex-row"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
