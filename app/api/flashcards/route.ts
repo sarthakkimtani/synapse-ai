@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       const user = data.session?.user;
 
       const { object } = await generateObject({
-        model: google("gemini-1.5-flash"),
+        model: google("gemini-2.5-flash"),
         prompt: enhancePromptWithParams(prompt),
         schema: FCExerciseSchema,
         system: systemPrompt,

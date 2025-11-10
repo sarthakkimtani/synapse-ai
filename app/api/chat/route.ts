@@ -22,20 +22,20 @@ export async function POST(req: NextRequest) {
     try {
       const body = await req.json();
       const validation = chatSchema.safeParse(body);
-      
+
       if (!validation.success) {
         return errorResponse("Invalid request format", 400);
       }
-      
+
       const { messages } = validation.data;
 
       const result = streamText({
-        model: google("gemini-1.5-flash"),
+        model: google("gemini-2.5-flash"),
         system: systemPrompt,
         messages,
       });
 
-      return result.toDataStreamResponse();
+      return result.toUIMessageStreamResponse();
     } catch (error) {
       console.error("Chat API error:", error);
       return errorResponse("Failed to process chat request", 500);
