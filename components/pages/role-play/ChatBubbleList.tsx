@@ -1,18 +1,16 @@
-import { Message } from "ai";
+import { UIMessage } from "ai";
 import Image from "next/image";
+import { useEffect } from "react";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-
 import { cn } from "@/lib/utils";
-
 import Synapse from "@/assets/synapse.svg";
-import { useEffect } from "react";
 
 export const ChatBubbleList = ({
   messages,
   onClose,
 }: {
-  messages: Message[];
+  messages: UIMessage[];
   onClose: () => void;
 }) => {
   const extractTranslation = (content: string) => {
@@ -30,8 +28,13 @@ export const ChatBubbleList = ({
 
   useEffect(() => {
     if (messages.length > 0) {
-      const lastMessage = messages[messages.length - 1];
-      if (lastMessage.content.includes("<END>")) {
+      const last = messages[messages.length - 1];
+      const textParts = last.parts.filter((p) => p.type === "text") as {
+        type: "text";
+        text: string;
+      }[];
+      const combined = textParts.map((p) => p.text).join("");
+      if (combined.includes("<END>")) {
         onClose();
       }
     }
@@ -40,12 +43,16 @@ export const ChatBubbleList = ({
   return (
     <TooltipProvider>
       {messages.slice(1).map((m) => {
-        const { original, translation } =
-          m.role === "assistant"
-            ? extractTranslation(m.content)
-            : { original: m.content, translation: null };
+        if (m.role === "system") return null;
 
-        if (m.role === "system" || original.length === 0) return null;
+        const textParts = m.parts.filter((p) => p.type === "text") as {
+          type: "text";
+          text: string;
+        }[];
+        const full = textParts.map((p) => p.text).join("");
+        const { original, translation } = extractTranslation(full);
+        if (!original.trim()) return null;
+
         return (
           <div
             key={m.id}

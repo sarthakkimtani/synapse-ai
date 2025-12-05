@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { Home } from "lucide-react";
-import { useChat } from "ai/react";
-import { useEffect, useState, Suspense } from "react";
+import { useChat } from "@ai-sdk/react";
+import { useEffect, useState, Suspense, FormEvent } from "react";
 import { useRouter } from "nextjs-toploader/app";
 import { useSearchParams } from "next/navigation";
 
@@ -18,22 +18,31 @@ import { enhancePromptWithParams } from "@/utils/exercise-params";
 import Grid from "@/assets/grid.svg";
 
 function ChatContent() {
+  const [input, setInput] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
 
-  const { messages, input, handleInputChange, handleSubmit, append, isLoading, error } = useChat();
+  const { messages, sendMessage, status, error } = useChat();
   const [closed, setClosed] = useState<boolean>(false);
 
   useEffect(() => {
     const prompt = `Start Role-Play mode in '${lang}' as the target language now.`;
     const enhancedPrompt = enhancePromptWithParams(prompt);
-    const addInitialMessage = async () => await append({ content: enhancedPrompt, role: "user" });
+    const addInitialMessage = async () => await sendMessage({ text: enhancedPrompt });
     addInitialMessage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClose = () => setClosed(true);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    sendMessage({ text: input });
+    setInput("");
+  };
 
   return (
     <main className="relative min-h-screen">
@@ -45,7 +54,7 @@ function ChatContent() {
         <div className="mx-auto max-w-2xl pt-8">
           <div className="space-y-6 px-4">
             <ChatBubbleList messages={messages} onClose={onClose} />
-            {isLoading && <LoadingBubble />}
+            {status === "submitted" && <LoadingBubble />}
             {error && <ErrorAlert error={error} />}
           </div>
         </div>
@@ -66,7 +75,7 @@ function ChatContent() {
           input={input}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
-          isLoading={isLoading}
+          isLoading={status === "submitted"}
         />
       )}
     </main>

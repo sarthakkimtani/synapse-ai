@@ -1,5 +1,5 @@
+import { FormEvent } from "react";
 import { Send } from "lucide-react";
-import { ChatRequestOptions } from "ai";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -8,15 +8,8 @@ import { cn } from "@/lib/utils";
 
 interface MessageBoxProps {
   input: string;
-  handleSubmit: (
-    event?: {
-      preventDefault?: () => void;
-    },
-    chatRequestOptions?: ChatRequestOptions
-  ) => void;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
-  ) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isLoading: boolean;
 }
 
