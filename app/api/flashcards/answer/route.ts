@@ -1,7 +1,7 @@
+import { auth } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 import { z } from "zod";
 
-import { createClient } from "@/utils/supabase/server";
 import { redisClient } from "@/lib/redis";
 import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 
@@ -23,11 +23,13 @@ export async function POST(req: NextRequest) {
       
       const { lang, index, answer } = validation.data;
 
-      const supabase = await createClient();
-      const { data } = await supabase.auth.getSession();
-      const user = data.session?.user;
+      const { userId } = await auth();
 
-      const redisKey = `user:${user?.id}:${lang}:flashcards`;
+      if (!userId) {
+        return errorResponse("Unauthorized", 401);
+      }
+
+      const redisKey = `user:${userId}:${lang}:flashcards`;
       const field = `card:${index}`;
       const correctAnswer = await redisClient.hget(redisKey, field);
 

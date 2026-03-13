@@ -1,26 +1,42 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { useClerk } from "@clerk/nextjs";
+import { LogOut } from "lucide-react";
 
-import { projectLink } from "@/utils/social";
 import { cn } from "@/lib/utils";
 
 import Brand from "@/assets/brand.svg";
-import GitHub from "@/assets/brands/github-dark.svg";
 
 export const AppNavbar = ({ className }: { className?: string }) => {
+  const { signOut } = useClerk();
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    if (isSigningOut) return;
+
+    setIsSigningOut(true);
+    await signOut({ redirectUrl: "/" });
+  };
+
   return (
     <div className={cn("flex flex-row items-center justify-between", className)}>
       <Link href="/">
         <Image className="cursor-pointer" src={Brand} draggable={false} alt="Brand" width={150} />
       </Link>
-      <Link
-        href={projectLink}
-        target="_blank"
-        className="text-md flex cursor-pointer items-center rounded-[30px] bg-primary px-5 py-4 text-black"
-      >
-        GitHub
-        <Image src={GitHub} className="ml-3 w-6" draggable={false} alt="GitHub" />
-      </Link>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={handleSignOut}
+          disabled={isSigningOut}
+          className="text-md flex items-center rounded-[30px] border border-primary/50 bg-[#111111] px-5 py-4 text-primary transition duration-150 ease-in-out hover:border-primary hover:bg-[#1A1A1A] hover:shadow-[0_0_18px_rgba(255,233,180,0.12)] disabled:cursor-not-allowed disabled:opacity-70"
+        >
+          <LogOut size={18} className="mr-2" />
+          {isSigningOut ? "Signing out..." : "Sign out"}
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 import { AuthButton } from "@/components/pages/auth/AuthButton";
-import { createClient } from "@/utils/supabase/server";
 
 import Grid from "@/assets/grid.svg";
 
@@ -12,10 +12,9 @@ export const metadata = {
 };
 
 export default async function Auth() {
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getUser();
+  const { userId } = await auth();
 
-  if (data?.user) {
+  if (userId) {
     redirect("/exercise");
   }
 

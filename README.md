@@ -16,12 +16,12 @@ Synapse AI is a modern web platform leveraging AI to transform language learning
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: TailwindCSS, Motion (previously Framer Motion) for animations
 - **AI Integration**: Google AI SDK, AI SDK
-- **Authentication**: Supabase
+- **Authentication**: Clerk
 - **Rate Limiting**: Upstash Redis
 
 ## 📋 Prerequisites
 
-- Node.js 18.0 or higher
+- Node.js 20.9 or higher
 - npm, yarn, or bun
 
 ## 🛠️ Getting Started
@@ -43,8 +43,8 @@ Synapse AI is a modern web platform leveraging AI to transform language learning
    Create a `.env.local` file in the root directory with the following variables:
 
    ```
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
    GOOGLE_API_KEY=your_google_api_key
    UPSTASH_REDIS_REST_URL=your_upstash_redis_url
    UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token

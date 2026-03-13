@@ -1,8 +1,9 @@
-import Image from "next/image";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+"use client";
 
-import { createClient } from "@/utils/supabase/server";
+import Image from "next/image";
+import { useState } from "react";
+import { useSignIn } from "@clerk/nextjs";
+
 import { cn } from "@/lib/utils";
 
 import Google from "@/assets/brands/google.svg";
@@ -14,32 +15,41 @@ interface AuthButtonProps {
 }
 
 export const AuthButton = ({ className, variant }: AuthButtonProps) => {
+  const { fetchStatus, signIn } = useSignIn();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleAuth = async () => {
-    "use server";
+    if (fetchStatus === "fetching" || isSubmitting) {
+      return;
+    }
 
-    const supabase = await createClient();
-    const origin = (await headers()).get("origin");
+    setIsSubmitting(true);
 
-    const { error, data } = await supabase.auth.signInWithOAuth({
-      provider: variant,
-      options: {
-        redirectTo: `${origin}/auth/callback`,
-      },
-    });
+    try {
+      const { error } = await signIn.sso({
+        strategy: variant === "google" ? "oauth_google" : "oauth_github",
+        redirectUrl: "/exercise",
+        redirectCallbackUrl: "/auth/sso-callback",
+      });
 
-    if (error) {
-      console.log(error);
-    } else {
-      return redirect(data.url);
+      if (error) {
+        console.error(error.message);
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsSubmitting(false);
     }
   };
 
   return (
     <button
+      type="button"
       className={cn(
-        "font-xl flex h-12 w-[275px] flex-row items-center justify-center rounded-xl bg-[#1E1E1E] font-semibold transition duration-150 ease-linear hover:bg-[#2F2F2F] md:w-72",
+        "font-xl flex h-12 w-[275px] flex-row items-center justify-center rounded-xl bg-[#1E1E1E] font-semibold transition duration-150 ease-linear hover:bg-[#2F2F2F] disabled:cursor-not-allowed disabled:opacity-70 md:w-72",
         className ?? ""
       )}
+      disabled={fetchStatus === "fetching" || isSubmitting}
       onClick={handleAuth}
     >
       <Image
@@ -49,7 +59,9 @@ export const AuthButton = ({ className, variant }: AuthButtonProps) => {
         draggable={false}
         alt="icon"
       />
-      Continue with {variant === "google" ? "Google" : "GitHub"}
+      {isSubmitting
+        ? `Redirecting to ${variant === "google" ? "Google" : "GitHub"}...`
+        : `Continue with ${variant === "google" ? "Google" : "GitHub"}`}
     </button>
   );
 };
