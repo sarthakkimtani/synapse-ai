@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 import { LightFiller } from "@/components/util/LightFiller";
@@ -28,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plusJakartaSans.className} bg-black text-white antialiased`}>
-        <NextTopLoader color="#FFE9B4" showSpinner={false} />
-        <LightFiller className="left-1/2 top-0 -z-10 w-full -translate-x-1/2 transform" />
-        {children}
-        <Analytics />
+        <ClerkProvider>
+          <NextTopLoader color="#FFE9B4" showSpinner={false} />
+          <LightFiller className="left-1/2 top-0 -z-10 w-full -translate-x-1/2 transform" />
+          {children}
+          <Analytics />
+        </ClerkProvider>
       </body>
     </html>
   );

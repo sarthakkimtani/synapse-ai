@@ -1,4 +1,5 @@
 import { google } from "@ai-sdk/google";
+import { auth } from "@clerk/nextjs/server";
 import { generateObject } from "ai";
 import { NextRequest } from "next/server";
 import { z } from "zod";
@@ -6,7 +7,6 @@ import { z } from "zod";
 import { FCExerciseSchema, SafeFCExerciseSchema } from "@/app/api/flashcards/schema";
 import { withRateLimit, errorResponse, successResponse } from "@/lib/api-utils";
 import { enhancePromptWithParams } from "@/utils/exercise-params";
-import { createClient } from "@/utils/supabase/server";
 import { systemPrompt } from "@/lib/prompt";
 import { redisClient } from "@/lib/redis";
 
@@ -29,9 +29,11 @@ export async function POST(req: NextRequest) {
 
       const { prompt, lang } = validation.data;
 
-      const supabase = await createClient();
-      const { data } = await supabase.auth.getSession();
-      const user = data.session?.user;
+      const { userId } = await auth();
+
+      if (!userId) {
+        return errorResponse("Unauthorized", 401);
+      }
 
       const { object } = await generateObject({
         model: google("gemini-2.5-flash"),
@@ -41,7 +43,7 @@ export async function POST(req: NextRequest) {
         temperature: 0.6,
       });
 
-      const redisKey = `user:${user?.id}:${lang}:flashcards`;
+      const redisKey = `user:${userId}:${lang}:flashcards`;
       const flashcardsObject = object.flashcards.reduce(
         (acc: Record<string, string>, card, index) => {
           acc[`card:${index}`] = card.correctAnswer;
